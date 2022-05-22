@@ -57,6 +57,7 @@ class Panel extends Component {
     render() {
         return (
             <div className={`${styles['panel-wrapper']} d-flex align-items-center`}>
+                <div className={styles['bg-overlay']}></div>
                 <Container className="d-flex align-items-center justify-content-center">
                     <Row className={styles['panel']}>
                         <Col xs={4}>

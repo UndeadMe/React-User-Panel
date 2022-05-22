@@ -5,6 +5,7 @@
 }
 .panel {
     width: 85%;
+    z-index: 2;
 }
 .panel-column {
     border-radius: 30px;
@@ -14,6 +15,26 @@
     position: absolute;
     bottom: 20px;
     left: 20px;
-    width: 130px;
+    width: 140px;
     padding: 8px 0;
+    z-index: 2;
+}
+.bg-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-image: url(/public/img/Arash.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 400px;
+    height: 100%;
+}
+.bg-overlay::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
 }
