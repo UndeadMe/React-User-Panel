@@ -1,4 +1,5 @@
 import { Component } from 'react'
+import { createPortal } from 'react-dom';
 
 // import styles of this component
 import styles from './Panel.module.css'
@@ -7,7 +8,7 @@ import UserCard from './UserCard/UserCard'
 import UserInformation from './UserInformation/UserInformation'
 import UserChangePassword from './UserChangePassword/UserChangePassword'
 // import other pkgs
-import { Row, Col, Container } from 'react-bootstrap'
+import { Row, Col, Container, Button } from 'react-bootstrap'
 
 class Panel extends Component {
     constructor(props) {
@@ -56,6 +57,9 @@ class Panel extends Component {
                         </Col>
                     </Row>
                 </Container>
+                {createPortal((
+                    <Button variant="primary" className={styles["log-out-btn"]}>Log out</Button>
+                ), document.getElementById("root"))}
             </div>
         )
     }

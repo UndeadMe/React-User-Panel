@@ -3,6 +3,8 @@ import { Component } from 'react'
 // import other component 
 import UserProfile from '../UserProfile/UserProfile'
 import SideBarLinks from '../SideBarLinks/SideBarLinks'
+// import other pkg
+import { Button } from 'react-bootstrap';
 
 class UserCard extends Component {
     render() {

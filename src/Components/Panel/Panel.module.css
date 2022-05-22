@@ -10,3 +10,10 @@
     border-radius: 30px;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 30px;
 }
+.log-out-btn {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    width: 130px;
+    padding: 8px 0;
+}
