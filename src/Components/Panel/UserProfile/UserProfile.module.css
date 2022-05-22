@@ -1,0 +1,40 @@
+.user-profile {
+    padding: 20px;
+    border-radius: 30px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 30px;
+}
+.user-profile-label {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    border-radius: 100%;
+    display: flex;
+    cursor: pointer;
+    margin-top: -85px;
+    outline: 10px solid white;
+}
+.user-profile-label img {
+    width: 100%;
+    object-fit: cover;
+    border-radius: 100%;
+}
+.username {
+    font-size: 1.3rem;
+    font-weight: bolder;
+}
+.user-email {
+    font-size: 0.9rem;
+    font-weight: lighter;
+}
+.user-birthday {
+    font-size: 0.9rem;
+}
+.profile-icon-box {
+    position: absolute;
+    right: 5px;
+    bottom: 0;
+    border-radius: 100%;
+    padding: 5px 4.5px;
+    outline: 5px solid white;
+    display: flex;
+}

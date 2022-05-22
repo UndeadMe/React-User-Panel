@@ -1,0 +1,8 @@
+.form-input {
+    padding: 12px 18px;
+    box-shadow: none !important;
+}
+.form-label {
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+}
