@@ -9,6 +9,8 @@ import FormInput from '../FormInput/FormInput';
 import PropTypes from 'prop-types';
 import { v4 as uniqid } from 'uuid';
 
+// password: asAS12!@
+
 class RegisterForm extends Component {
     constructor(props) {
         super(props)
@@ -19,6 +21,9 @@ class RegisterForm extends Component {
             password: "",
             confirmPassword: "",
             birthday: "",
+            
+            isIterateUsername: false,
+            isIterateEmail: false,
 
             submit: false,
         }
@@ -29,7 +34,7 @@ class RegisterForm extends Component {
         this.validateBirthDayInp = this.validateBirthDayInp.bind(this)
         this.validateConfirmPasswordInp = this.validateConfirmPasswordInp.bind(this)
         this.checkValidity = this.checkValidity.bind(this)
-        this.getStorage = this.getStorage.bind(this)
+        this.isUserIterate = this.isUserIterate.bind(this)
     }
 
     setInputsValues(e) {
@@ -41,7 +46,7 @@ class RegisterForm extends Component {
         
         const allInpsIsValid = this.checkValidity() // check all the inputs are valid
         
-        if (allInpsIsValid) {   
+        if (allInpsIsValid) {
             const data = new FormData(e.target)
 
             const userId = uniqid()
@@ -52,11 +57,14 @@ class RegisterForm extends Component {
             }
 
             if (this.getStorage("users")) {
-                const storage = this.getStorage("users")
-                storage.push(userRegistered)
-                // add new user to storage and init the user-id
-                localStorage.setItem("users", JSON.stringify(storage))
-                localStorage.setItem("id", userId)
+                const [isUsernameIterate, isEmailIterate] = this.isUserIterate(userRegistered.username, userRegistered.email)
+                if (!isUsernameIterate && !isEmailIterate) {
+                    const storage = this.getStorage("users")
+                    storage.push(userRegistered)
+                    // add new user to storage and init the user-id
+                    localStorage.setItem("users", JSON.stringify(storage))
+                    localStorage.setItem("id", userId)
+                }
             } else {
                 localStorage.setItem("users", JSON.stringify([ userRegistered ]))
                 localStorage.setItem("id", userId)
@@ -66,6 +74,17 @@ class RegisterForm extends Component {
         }
 
         this.setState({ submit: true })
+    }
+
+    isUserIterate(username, email) {
+        const users = this.getStorage('users')
+        const isUsernameIterate =  users.some(user => user.username === username)
+        const isEmailIterate = users.some(user => user.email === email)
+        
+        isUsernameIterate ? this.setState({ isIterateUsername: true }) : this.setState({ isIterateUsername: false })
+        isEmailIterate ? this.setState({ isIterateEmail: true }) : this.setState({ isIterateEmail: false })
+
+        return [isUsernameIterate, isEmailIterate]
     }
 
     getStorage(storageName) {
@@ -124,34 +143,70 @@ class RegisterForm extends Component {
             <Form noValidate onSubmit={this.registerSubmitHandler} className={styles["form"]}>
                 <h2>Register</h2>
 
-                <FormInput  
-                    className="mb-4 mt-5"
-                    formName="username"
-                    formId="username-input"
-                    formLabel="Username"
-                    formPlaceHolder="Enter your Username"
-                    formType="text"
-                    onChange={this.setInputsValues}
-                    value={this.state.username}
-                    errMsg="enter the username field correctly"
-                    successMsg="done"
-                    isValid={this.validateInput(/^[a-zA-Z0-9]+$/, "valid", this.state.username)}
-                    isInvalid={this.validateInput(/^[a-zA-Z0-9]+$/, "inValid", this.state.username)}
-                />
-                <FormInput  
-                    className="mb-4"
-                    formName="email"
-                    formId="email-input"
-                    formLabel="Email"
-                    formPlaceHolder="Enter your Email"
-                    formType="text"
-                    onChange={this.setInputsValues}
-                    value={this.state.email}
-                    errMsg="enter the email field correctly"
-                    successMsg="done"
-                    isValid={this.validateInput(/\S+@\S+\.\S+/, "valid", this.state.email)}
-                    isInvalid={this.validateInput(/\S+@\S+\.\S+/, "inValid", this.state.email)}
-                />
+                {this.state.submit && this.state.isIterateUsername && (
+                    <FormInput  
+                        className="mb-4 mt-5"
+                        formName="username"
+                        formId="username-input"
+                        formLabel="Username"
+                        formPlaceHolder="Enter your Username"
+                        formType="text"
+                        onChange={this.setInputsValues}
+                        value={this.state.username}
+                        errMsg="please enter other username"
+                        successMsg="done"
+                        isValid={false}
+                        isInvalid={true}
+                    />
+                )}
+                {this.state.isIterateUsername === false && (
+                    <FormInput  
+                        className="mb-4 mt-5"
+                        formName="username"
+                        formId="username-input"
+                        formLabel="Username"
+                        formPlaceHolder="Enter your Username"
+                        formType="text"
+                        onChange={this.setInputsValues}
+                        value={this.state.username}
+                        errMsg="enter the username field correctly"
+                        successMsg="done"
+                        isValid={this.validateInput(/^[a-zA-Z0-9]+$/, "valid", this.state.username)}
+                        isInvalid={this.validateInput(/^[a-zA-Z0-9]+$/, "inValid", this.state.username)}
+                    />
+                )}
+                {this.state.submit && this.state.isIterateEmail && (
+                    <FormInput  
+                        className="mb-4"
+                        formName="email"
+                        formId="email-input"
+                        formLabel="Email"
+                        formPlaceHolder="Enter your Email"
+                        formType="text"
+                        onChange={this.setInputsValues}
+                        value={this.state.email}
+                        errMsg="please enter other email"
+                        successMsg="done"
+                        isValid={false}
+                        isInvalid={true}
+                    />
+                )}
+                {this.state.isIterateEmail === false && (
+                    <FormInput  
+                        className="mb-4"
+                        formName="email"
+                        formId="email-input"
+                        formLabel="Email"
+                        formPlaceHolder="Enter your Email"
+                        formType="text"
+                        onChange={this.setInputsValues}
+                        value={this.state.email}
+                        errMsg="enter the email field correctly"
+                        successMsg="done"
+                        isValid={this.validateInput(/\S+@\S+\.\S+/, "valid", this.state.email)}
+                        isInvalid={this.validateInput(/\S+@\S+\.\S+/, "inValid", this.state.email)}
+                    />
+                )}
                 <FormInput 
                     className="mb-4"
                     formName="birthday"
