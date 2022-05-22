@@ -15,8 +15,10 @@ class Panel extends Component {
         super(props)
         this.myVerifyUser = this.getUserFromStorage()
         this.state = {
-            user: this.initState(this.myVerifyUser)
+            ...this.initState(this.myVerifyUser)
         }
+
+        this.logOut = this.logOut.bind(this)
     }
 
     getUserFromStorage() {
@@ -27,7 +29,7 @@ class Panel extends Component {
         return myVerifyUser
     }
 
-    initState({ id, username, email, birthday, password, confirmPassword }) {
+    initState({ id, username, email, birthday, password, confirmPassword, isLogin }) {
         return ({
             id,
             username,
@@ -35,7 +37,21 @@ class Panel extends Component {
             birthday,
             password,
             confirmPassword,
+            isLogin,
         })
+    }
+
+    updateStorage() {
+        const users = JSON.parse(localStorage.getItem('users'))
+        const myVerifyUser = users.find(user => user.id === this.state.id)
+        myVerifyUser.isLogin = false
+        localStorage.setItem('users', JSON.stringify(users))
+    }
+
+    logOut() {
+        this.setState({ isLogin: false })
+        this.updateStorage()
+        this.props.onLogOut()
     }
 
     render() {
@@ -45,9 +61,9 @@ class Panel extends Component {
                     <Row className={styles['panel']}>
                         <Col xs={4}>
                             <UserCard 
-                                username={this.state.user.username} 
-                                userBirthday={this.state.user.birthday} 
-                                userEmail={this.state.user.email} 
+                                username={this.state.username} 
+                                userBirthday={this.state.birthday} 
+                                userEmail={this.state.email} 
                             />
                         </Col>
                         
@@ -58,7 +74,12 @@ class Panel extends Component {
                     </Row>
                 </Container>
                 {createPortal((
-                    <Button variant="primary" className={styles["log-out-btn"]}>Log out</Button>
+                    <Button 
+                        variant="primary" 
+                        className={styles["log-out-btn"]} 
+                        onClick={this.logOut}>
+                        Log out
+                    </Button>
                 ), document.getElementById("root"))}
             </div>
         )

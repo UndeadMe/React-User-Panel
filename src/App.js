@@ -30,12 +30,14 @@ class App extends Component {
       const users = JSON.parse(localStorage.getItem("users"))
       
       const [userRegistered] = users.filter(user => user.id === userId)
+      
       userRegistered.isLogin && this.changeToggle('panel')
+      userRegistered.isLogin === false && this.changeToggle('register')
     } else this.changeToggle('register')
   }
 
   checkIsInitStorage() {
-    return JSON.parse(localStorage.getItem("users"))
+    return JSON.parse(localStorage.getItem("users")) && JSON.parse(localStorage.getItem("users")).length !== 0
   }
 
   componentDidMount() {
@@ -50,7 +52,7 @@ class App extends Component {
             <RegisterForm onRegister={this.checkUserIsRegister} />
           </Container>
         )}
-        { this.state.toggle === 'panel' && <Panel /> }
+        { this.state.toggle === 'panel' && <Panel onLogOut={this.checkUserIsRegister} /> }
       </>
     )
   }
