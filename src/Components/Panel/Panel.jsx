@@ -9,6 +9,7 @@ import UserInformation from './UserInformation/UserInformation'
 import UserChangePassword from './UserChangePassword/UserChangePassword'
 // import other pkgs
 import { Row, Col, Container, Button } from 'react-bootstrap'
+import PropTypes from 'prop-types'
 
 class Panel extends Component {
     constructor(props) {
@@ -85,6 +86,11 @@ class Panel extends Component {
             </div>
         )
     }
+}
+
+// validate component
+Panel.propTypes = {
+    onLogOut: PropTypes.func.isRequired
 }
 
 export default Panel
