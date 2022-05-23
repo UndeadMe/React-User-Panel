@@ -1,15 +1,13 @@
 import { Component } from 'react';
 // import styles of this component
-import styles from './RegisterForm.module.css'
+import styles from '../Forms.module.css'
 // import react bootstrap component
-import { Form, Button } from 'react-bootstrap'
+import { Form, Button, Container } from 'react-bootstrap'
 // import other component to use
 import FormInput from '../FormInput/FormInput';
 // import other pkg to use
 import PropTypes from 'prop-types';
 import { v4 as uniqid } from 'uuid';
-
-// password: asAS12!@
 
 class RegisterForm extends Component {
     constructor(props) {
@@ -140,129 +138,142 @@ class RegisterForm extends Component {
 
     render() {
         return (
-            <Form noValidate onSubmit={this.registerSubmitHandler} className={styles["form"]}>
-                <h2>Register</h2>
+            <Container className='d-flex justify-content-center align-items-center vh-100 px-5'>
+                <Form noValidate onSubmit={this.registerSubmitHandler} className={styles.form}>
+                    <h2>Register</h2>
 
-                {this.state.submit && this.state.isIterateUsername && (
-                    <FormInput  
-                        className="mb-4 mt-5"
-                        formName="username"
-                        formId="username-input"
-                        formLabel="Username"
-                        formPlaceHolder="Enter your Username"
-                        formType="text"
+                    {this.state.submit && this.state.isIterateUsername && (
+                        <FormInput  
+                            className="mb-4 mt-5"
+                            formName="username"
+                            formId="username-input"
+                            formLabel="Username"
+                            formPlaceHolder="Enter your Username"
+                            formType="text"
+                            onChange={this.setInputsValues}
+                            value={this.state.username}
+                            errMsg="please enter other username"
+                            successMsg="done"
+                            isValid={false}
+                            isInvalid={true}
+                        />
+                    )}
+                    {this.state.isIterateUsername === false && (
+                        <FormInput  
+                            className="mb-4 mt-5"
+                            formName="username"
+                            formId="username-input"
+                            formLabel="Username"
+                            formPlaceHolder="Enter your Username"
+                            formType="text"
+                            onChange={this.setInputsValues}
+                            value={this.state.username}
+                            errMsg="enter the username field correctly"
+                            successMsg="done"
+                            isValid={this.validateInput(/^[a-zA-Z0-9]+$/, "valid", this.state.username)}
+                            isInvalid={this.validateInput(/^[a-zA-Z0-9]+$/, "inValid", this.state.username)}
+                        />
+                    )}
+                    {this.state.submit && this.state.isIterateEmail && (
+                        <FormInput  
+                            className="mb-4"
+                            formName="email"
+                            formId="email-input"
+                            formLabel="Email"
+                            formPlaceHolder="Enter your Email"
+                            formType="text"
+                            onChange={this.setInputsValues}
+                            value={this.state.email}
+                            errMsg="please enter other email"
+                            successMsg="done"
+                            isValid={false}
+                            isInvalid={true}
+                        />
+                    )}
+                    {this.state.isIterateEmail === false && (
+                        <FormInput  
+                            className="mb-4"
+                            formName="email"
+                            formId="email-input"
+                            formLabel="Email"
+                            formPlaceHolder="Enter your Email"
+                            formType="text"
+                            onChange={this.setInputsValues}
+                            value={this.state.email}
+                            errMsg="enter the email field correctly"
+                            successMsg="done"
+                            isValid={this.validateInput(/\S+@\S+\.\S+/, "valid", this.state.email)}
+                            isInvalid={this.validateInput(/\S+@\S+\.\S+/, "inValid", this.state.email)}
+                        />
+                    )}
+                    <FormInput 
+                        className="mb-4"
+                        formName="birthday"
+                        formId="birthday-input"
+                        formLabel="Birthday"
+                        formType="date"
                         onChange={this.setInputsValues}
-                        value={this.state.username}
-                        errMsg="please enter other username"
+                        value={this.state.birthday}
+                        errMsg="enter the birthday date field correctly"
                         successMsg="done"
-                        isValid={false}
-                        isInvalid={true}
+                        isValid={this.validateBirthDayInp("valid")}
+                        isInvalid={this.validateBirthDayInp("inValid")}
                     />
-                )}
-                {this.state.isIterateUsername === false && (
-                    <FormInput  
-                        className="mb-4 mt-5"
-                        formName="username"
-                        formId="username-input"
-                        formLabel="Username"
-                        formPlaceHolder="Enter your Username"
-                        formType="text"
+                    <FormInput
+                        className="mb-4"
+                        formName="password"
+                        formId="password-input"
+                        formLabel="Password"
+                        formPlaceHolder="Enter your Password"
+                        formType="password"
+                        errMsg="enter the password field correctly"
+                        successMsg="done"
                         onChange={this.setInputsValues}
-                        value={this.state.username}
-                        errMsg="enter the username field correctly"
-                        successMsg="done"
-                        isValid={this.validateInput(/^[a-zA-Z0-9]+$/, "valid", this.state.username)}
-                        isInvalid={this.validateInput(/^[a-zA-Z0-9]+$/, "inValid", this.state.username)}
+                        value={this.state.password}
+                        isValid={this.validateInput(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/, "valid", this.state.password)}
+                        isInvalid={this.validateInput(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/, "inValid", this.state.password)}
                     />
-                )}
-                {this.state.submit && this.state.isIterateEmail && (
                     <FormInput  
                         className="mb-4"
-                        formName="email"
-                        formId="email-input"
-                        formLabel="Email"
-                        formPlaceHolder="Enter your Email"
-                        formType="text"
-                        onChange={this.setInputsValues}
-                        value={this.state.email}
-                        errMsg="please enter other email"
+                        formName="confirmPassword"
+                        formId="confirm-password-input"
+                        formLabel="Confirm Password"
+                        formPlaceHolder="Enter your confirm password"
+                        formType="password"
+                        errMsg="enter the confirm password field correctly"
                         successMsg="done"
-                        isValid={false}
-                        isInvalid={true}
-                    />
-                )}
-                {this.state.isIterateEmail === false && (
-                    <FormInput  
-                        className="mb-4"
-                        formName="email"
-                        formId="email-input"
-                        formLabel="Email"
-                        formPlaceHolder="Enter your Email"
-                        formType="text"
                         onChange={this.setInputsValues}
-                        value={this.state.email}
-                        errMsg="enter the email field correctly"
-                        successMsg="done"
-                        isValid={this.validateInput(/\S+@\S+\.\S+/, "valid", this.state.email)}
-                        isInvalid={this.validateInput(/\S+@\S+\.\S+/, "inValid", this.state.email)}
+                        value={this.state.confirmPassword}
+                        isValid={this.validateConfirmPasswordInp("valid")}
+                        isInvalid={this.validateConfirmPasswordInp("inValid")}
                     />
-                )}
-                <FormInput 
-                    className="mb-4"
-                    formName="birthday"
-                    formId="birthday-input"
-                    formLabel="Birthday"
-                    formType="date"
-                    onChange={this.setInputsValues}
-                    value={this.state.birthday}
-                    errMsg="enter the birthday date field correctly"
-                    successMsg="done"
-                    isValid={this.validateBirthDayInp("valid")}
-                    isInvalid={this.validateBirthDayInp("inValid")}
-                />
-                <FormInput
-                    className="mb-4"
-                    formName="password"
-                    formId="password-input"
-                    formLabel="Password"
-                    formPlaceHolder="Enter your Password"
-                    formType="password"
-                    errMsg="enter the password field correctly"
-                    successMsg="done"
-                    onChange={this.setInputsValues}
-                    value={this.state.password}
-                    isValid={this.validateInput(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/, "valid", this.state.password)}
-                    isInvalid={this.validateInput(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/, "inValid", this.state.password)}
-                />
-                <FormInput  
-                    className="mb-4"
-                    formName="confirmPassword"
-                    formId="confirm-password-input"
-                    formLabel="Confirm Password"
-                    formPlaceHolder="Enter your confirm password"
-                    formType="password"
-                    errMsg="enter the confirm password field correctly"
-                    successMsg="done"
-                    onChange={this.setInputsValues}
-                    value={this.state.confirmPassword}
-                    isValid={this.validateConfirmPasswordInp("valid")}
-                    isInvalid={this.validateConfirmPasswordInp("inValid")}
-                />
 
-                <Button 
-                    variant="primary" className={styles["submit-btn"]} 
-                    type="submit" 
-                    style={{ width: "100%" }}>
-                    Register
-                </Button>
-            </Form>
+                    <Button 
+                        onClick={() => this.props.onLogin('login')}
+                        className='shadow-none mt-4'
+                        type="button"
+                        variant=""
+                        style={{ width: "100%" }}>
+                        you have an account ?
+                    </Button>
+
+                    <Button 
+                        className={`${styles["submit-btn"]}`} 
+                        variant="primary" 
+                        type="submit" 
+                        style={{ width: "100%" }}>
+                        Register
+                    </Button>
+                </Form>
+            </Container>
         )
     }
 }
 
 // validate this component
 RegisterForm.propTypes = {
-    onRegister: PropTypes.func.isRequired
+    onRegister: PropTypes.func.isRequired,
+    onLogin: PropTypes.func.isRequired
 }
 
 export default RegisterForm

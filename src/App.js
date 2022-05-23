@@ -2,10 +2,10 @@ import { Component } from 'react'
 
 // import bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { Container } from 'react-bootstrap'
 // import my other component 
 import RegisterForm from './Components/Forms/RegisterForm/RegisterForm'
 import Panel from './Components/Panel/Panel';
+import LoginForm from './Components/Forms/LoginForm/LoginForm';
 
 class App extends Component {
   constructor(props) {
@@ -15,7 +15,7 @@ class App extends Component {
       toggle: null
     }
 
-    this.changePageToPanel = this.changeToggle.bind(this)
+    this.changeToggle = this.changeToggle.bind(this)
     this.checkIsInitStorage = this.checkIsInitStorage.bind(this)
     this.checkUserIsRegister = this.checkUserIsRegister.bind(this)
   }
@@ -30,9 +30,8 @@ class App extends Component {
       const users = JSON.parse(localStorage.getItem("users"))
       
       const [userRegistered] = users.filter(user => user.id === userId)
-      
       userRegistered.isLogin && this.changeToggle('panel')
-      userRegistered.isLogin === false && this.changeToggle('register')
+      userRegistered.isLogin === false && this.changeToggle('login')
     } else this.changeToggle('register')
   }
 
@@ -43,15 +42,12 @@ class App extends Component {
   componentDidMount() {
     this.checkUserIsRegister()
   }
-  
+
   render() {
     return (
       <>
-        {this.state.toggle === "register" && (
-          <Container className='d-flex justify-content-center align-items-center vh-100 px-5'>
-            <RegisterForm onRegister={this.checkUserIsRegister} />
-          </Container>
-        )}
+        { this.state.toggle === "register" && <RegisterForm onRegister={this.checkUserIsRegister}  onLogin={this.changeToggle} /> }
+        { this.state.toggle === 'login' && <LoginForm /> }
         { this.state.toggle === 'panel' && <Panel onLogOut={this.checkUserIsRegister} /> }
       </>
     )
