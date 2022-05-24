@@ -13,10 +13,6 @@ class FormInput extends PureComponent {
         this.changeFormInputValueHandler = this.changeFormInputValueHandler.bind(this)
     }
 
-    changeFormInputValueHandler(e) {
-        this.props.onChange(e)
-    }
-
     render() {
         // formId sets on the Form Control and FormGroup
         // formName is for name of the Form Control
