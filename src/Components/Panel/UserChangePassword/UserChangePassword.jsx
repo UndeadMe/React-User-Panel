@@ -4,7 +4,7 @@ import { Component } from 'react'
 import Titles from '../../Titles/Titles'
 import FormInput from '../../Forms/FormInput/FormInput'
 // import other pkg
-import { Form, Button, Row, Col } from 'react-bootstrap'
+import { Form, Button, Col } from 'react-bootstrap'
 
 class UserChangePassword extends Component {
     render() {
@@ -14,46 +14,35 @@ class UserChangePassword extends Component {
 
                 <Form className="mt-5">
                     <FormInput 
-                        inpClass='px-3 py-2'
+                        type="Password"
                         className="p-0"
-                        formName="currentPassword"
-                        formId="current-password-input"
-                        formLabel="Current Password"
-                        formPlaceHolder="Enter your Current Password"
-                        formType="Password"
-                        size='sm'
-                        errMsg="enter the current password field correctly"
-                        successMsg="done"
+                        inpClass='px-3 py-2'
+                        name="currentPassword"
+                        controlId="current-password-input"
+                        text="Current Password"
+                        placeholder="Enter your Current Password"
                     />
                     <FormInput 
                         as={Col}
+                        type="password"
                         inpClass='px-3 py-2'
                         className="p-0 mt-3"
-                        formName="newPassword"
-                        formId="new-password-input"
-                        formLabel="New Password"
-                        formPlaceHolder="Enter your New Password"
-                        formType="password"
-                        size="sm"
-                        errMsg="enter the new password field correctly"
-                        successMsg="done"
+                        name="newPassword"
+                        controlId="new-password-input"
+                        text="New Password"
+                        placeholder="Enter your New Password"
                     />
                     <FormInput 
                         as={Col}
+                        type="password"
                         inpClass='px-3 py-2'
                         className="p-0 mt-3"
-                        formName="ConfirmNewPassword"
-                        formId="confirm-new-password-input"
-                        formLabel="Confirm New Password"
-                        formPlaceHolder="Enter your Confirm New Password"
-                        formType="password"
-                        size="sm"
-                        errMsg="enter the confirm new password field correctly"
-                        successMsg="done"
+                        name="ConfirmNewPassword"
+                        controlId="confirm-new-password-input"
+                        text="Confirm New Password"
+                        placeholder="Enter your Confirm New Password"
                     />
-                    <Button 
-                        variant="primary" className='mt-5 py-2 px-4'
-                        type="submit">
+                    <Button variant="primary" className='mt-5 py-2 px-4' type="submit">
                         Update
                     </Button>
                 </Form>

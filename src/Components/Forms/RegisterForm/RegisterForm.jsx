@@ -19,7 +19,58 @@ const RegisterForm = ({ onRegister }) => {
             <Form noValidate className={styles.form}>
                 <h2>Register</h2>
 
-                
+                <FormInput 
+                    className="mt-5 mb-4"
+                    controlId="usernameInp"
+                    name="username"
+                    text="Username"
+                    placeholder="Enter your username"
+                    valid={false}
+                    invalid={false}
+                />
+
+                <FormInput 
+                    className="mb-4"
+                    controlId="emailInp"
+                    name="email"
+                    text="Email"
+                    placeholder="Enter your Email"
+                    valid={false}
+                    invalid={false}
+                />
+
+                <FormInput 
+                    className="mb-4"
+                    type="date"
+                    controlId="birthdayInp"
+                    name="birthday"
+                    text="birthday"
+                    placeholder="Enter your birthday date"
+                    valid={false}
+                    invalid={false}
+                />
+
+                <FormInput 
+                    className="mb-4"
+                    type="password"
+                    controlId="passwordInp"
+                    name="password"
+                    text="Password"
+                    placeholder="Enter your Password"
+                    valid={false}
+                    invalid={false}
+                />
+
+                <FormInput 
+                    className="mb-4"
+                    type="password"
+                    controlId="confirmPasswordInp"
+                    name="confirmPassword"
+                    text="Confirm Password"
+                    placeholder="Enter your Confirm Password"
+                    valid={false}
+                    invalid={false}
+                />
 
                 <Button 
                     onClick={() => this.props.onLogin('login')}

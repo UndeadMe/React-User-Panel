@@ -19,27 +19,20 @@ class UserInformation extends Component {
                             as={Col}
                             inpClass='px-3 py-2'
                             className="p-0"
-                            formName="firstName"
-                            formId="first-name-input"
-                            formLabel="First Name"
-                            formPlaceHolder="Enter your first name"
-                            formType="text"
-                            size='sm'
-                            errMsg="enter the first name field correctly"
-                            successMsg="done"
+                            name="firstName"
+                            controlId="first-name-input"
+                            text="First Name"
+                            placeholder="Enter your first name"
+                            size='md'
                         />
                         <FormInput 
                             as={Col}
                             inpClass='px-3 py-2'
                             className="p-0 ms-5"
-                            formName="lastName"
-                            formId="last-name-input"
-                            formLabel="Last Name"
-                            formPlaceHolder="Enter your Last Name"
-                            formType="text"
-                            size="sm"
-                            errMsg="enter the Last Name field correctly"
-                            successMsg="done"
+                            name="lastName"
+                            controlId="last-name-input"
+                            text="Last Name"
+                            placeholder="Enter your Last Name"
                         />
                     </Row>
                     <Row className="mt-4 px-3">
@@ -47,27 +40,20 @@ class UserInformation extends Component {
                             as={Col}
                             inpClass='px-3 py-2'
                             className="p-0"
-                            formName="email"
-                            formId="email-input"
-                            formLabel="Email"
-                            formPlaceHolder="Enter your Email"
-                            formType="text"
-                            size='sm'
-                            errMsg="enter the email field correctly"
-                            successMsg="done"
+                            name="email"
+                            controlId="email-input"
+                            text="Email"
+                            placeholder="Enter your Email"
                         />
                         <FormInput 
                             as={Col}
                             inpClass='px-3 py-2'
                             className="p-0 ms-5"
-                            formName="birthday"
-                            formId="birthday-input"
-                            formLabel="birthday"
-                            formPlaceHolder="Enter your birthday"
-                            formType="date"
-                            size="sm"
-                            errMsg="enter the birthday field correctly"
-                            successMsg="done"
+                            name="birthday"
+                            controlId="birthday-input"
+                            text="birthday"
+                            placeholder="Enter your birthday"
+                            type="date"
                         />
                     </Row>
                     <Button 

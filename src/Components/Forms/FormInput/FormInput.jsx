@@ -8,34 +8,39 @@ import { FormGroup, FormLabel, FormControl, FormText } from 'react-bootstrap'
 import PropTypes  from 'prop-types'
 
 class FormInput extends PureComponent {
-    constructor(props) {
-        super(props)
-        this.changeFormInputValueHandler = this.changeFormInputValueHandler.bind(this)
-    }
-
     render() {
-        // formId sets on the Form Control and FormGroup
-        // formName is for name of the Form Control
-        const {inpClass, className, formId, formName , formLabel, formPlaceHolder, formType, as,
-               errMsg, successMsg, value, isValid, isInvalid, size='md' } = this.props
+        // props
+        const {
+            inpClass='',
+            className='', 
+            controlId, 
+            name, 
+            text, 
+            placeholder, 
+            type="text", 
+            as,
+            errMsg, 
+            successMsg, 
+            valid, 
+            invalid, 
+            size='md' 
+        } = this.props
         
         return (
-            <FormGroup controlId={formId} className={className} as={as}>
-                <FormLabel className={styles['form-label']}>{formLabel}</FormLabel>
+            <FormGroup controlId={controlId} className={className} as={as}>
+                <FormLabel className={styles['form-label']}>{text}</FormLabel>
                 <FormControl 
-                    isInvalid={isInvalid}
-                    isValid={isValid}
-                    type={formType} 
+                    isInvalid={invalid}
+                    isValid={valid}
+                    type={type} 
                     className={`${styles["form-input"]} ${inpClass}`} 
                     size={size}
-                    placeholder={formPlaceHolder} 
+                    placeholder={placeholder} 
                     autoComplete="off"
-                    onChange={this.changeFormInputValueHandler} 
-                    name={formName}
-                    value={value}
+                    name={name}
                 />
-                {isInvalid && <FormText className="text-danger">{ errMsg }</FormText>}
-                {isValid && <FormText className="text-success">{ successMsg }</FormText>}
+                {invalid && <FormText className="text-danger">{ errMsg }</FormText>}
+                {valid && <FormText className="text-success">{ successMsg }</FormText>}
             </FormGroup>
         )
     }
@@ -43,20 +48,7 @@ class FormInput extends PureComponent {
 
 // validate this component
 FormInput.propTypes = {
-    className: PropTypes.string,
-    formId: PropTypes.string.isRequired,
-    formLabel: PropTypes.string.isRequired,
-    formPlaceHolder: PropTypes.string,
-    formType: PropTypes.string.isRequired,
-    formText: PropTypes.string,
-    onChange: PropTypes.func,
-    formName: PropTypes.string,
-    value: PropTypes.string,
-    isValid: PropTypes.bool,
-    isInvalid: PropTypes.bool,
-    size: PropTypes.string,
-    inpClass: PropTypes.string,
-    as: PropTypes.elementType,
+    
 }
 
 export default FormInput
