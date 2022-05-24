@@ -250,18 +250,16 @@ class RegisterForm extends Component {
 
                     <Button 
                         onClick={() => this.props.onLogin('login')}
-                        className='shadow-none mt-4'
+                        className='shadow-none mt-4 p-0'
                         type="button"
-                        variant=""
-                        style={{ width: "100%" }}>
+                        variant="">
                         you have an account ?
                     </Button>
 
                     <Button 
-                        className={`${styles["submit-btn"]}`} 
+                        className={`${styles["submit-btn"]} w-100`} 
                         variant="primary" 
-                        type="submit" 
-                        style={{ width: "100%" }}>
+                        type="submit">
                         Register
                     </Button>
                 </Form>

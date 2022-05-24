@@ -7,6 +7,7 @@
     "@testing-library/react": "^13.2.0",
     "@testing-library/user-event": "^13.5.0",
     "bootstrap": "^5.1.3",
+    "formik": "^2.2.9",
     "iconsax-react": "^0.0.8",
     "prop-types": "^15.8.1",
     "react": "^18.1.0",
@@ -15,7 +16,8 @@
     "react-iconsax": "^0.9.1",
     "react-scripts": "5.0.1",
     "uuid": "^8.3.2",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "yup": "^0.32.11"
   },
   "scripts": {
     "start": "react-scripts start",
