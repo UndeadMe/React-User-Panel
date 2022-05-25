@@ -23,7 +23,9 @@ class FormInput extends PureComponent {
             successMsg, 
             valid, 
             invalid, 
-            size='md' 
+            size='md',
+            value,
+            onChange,
         } = this.props
         
         return (
@@ -35,9 +37,12 @@ class FormInput extends PureComponent {
                     type={type} 
                     className={`${styles["form-input"]} ${inpClass}`} 
                     size={size}
-                    placeholder={placeholder} 
+                    placeholder={placeholder}
                     autoComplete="off"
                     name={name}
+                    value={value}
+                    onChange={onChange}
+                    spellCheck="off"
                 />
                 {invalid && <FormText className="text-danger">{ errMsg }</FormText>}
                 {valid && <FormText className="text-success">{ successMsg }</FormText>}
@@ -60,7 +65,9 @@ FormInput.propTypes = {
     successMsg: PropTypes.string, 
     valid: PropTypes.bool.isRequired, 
     invalid: PropTypes.bool.isRequired, 
-    size: PropTypes.string
+    size: PropTypes.string,
+    value: PropTypes.string.isRequired,
+    onChange: PropTypes.func.isRequired
 }
 
 export default FormInput
