@@ -27,7 +27,7 @@ class FormInput extends PureComponent {
             value,
             onChange,
         } = this.props
-        
+
         return (
             <FormGroup controlId={controlId} className={className} as={as}>
                 <FormLabel className={styles['form-label']}>{text}</FormLabel>
@@ -60,7 +60,7 @@ FormInput.propTypes = {
     text: PropTypes.string.isRequired,
     placeholder: PropTypes.string.isRequired, 
     type: PropTypes.string, 
-    as: PropTypes.element,
+    as: PropTypes.elementType,
     errMsg: PropTypes.string, 
     successMsg: PropTypes.string, 
     valid: PropTypes.bool.isRequired, 

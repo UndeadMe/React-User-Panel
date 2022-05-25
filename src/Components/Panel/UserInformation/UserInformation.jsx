@@ -24,6 +24,8 @@ class UserInformation extends Component {
                             text="First Name"
                             placeholder="Enter your first name"
                             size='md'
+                            invalid={false}
+                            valid={false}
                         />
                         <FormInput 
                             as={Col}
@@ -33,6 +35,8 @@ class UserInformation extends Component {
                             controlId="last-name-input"
                             text="Last Name"
                             placeholder="Enter your Last Name"
+                            invalid={false}
+                            valid={false}
                         />
                     </Row>
                     <Row className="mt-4 px-3">
@@ -44,6 +48,8 @@ class UserInformation extends Component {
                             controlId="email-input"
                             text="Email"
                             placeholder="Enter your Email"
+                            invalid={false}
+                            valid={false}
                         />
                         <FormInput 
                             as={Col}
@@ -54,6 +60,8 @@ class UserInformation extends Component {
                             text="birthday"
                             placeholder="Enter your birthday"
                             type="date"
+                            invalid={false}
+                            valid={false}
                         />
                     </Row>
                     <Button 
