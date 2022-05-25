@@ -13,7 +13,7 @@ import PropTypes from 'prop-types';
 import { v4 as uniqid } from 'uuid';
 import { Container, Button, Form } from 'react-bootstrap';
 
-const RegisterForm = ({ onRegister }) => {
+const RegisterForm = ({ onRegister, onLogin }) => {
     const [submit, setSubmit] = useState(false)
 
     const formik = useFormik({
@@ -39,10 +39,26 @@ const RegisterForm = ({ onRegister }) => {
                 .oneOf([Yup.ref('password')], 'your confirm password must match'),
         }),
         onSubmit: (values, actions) => {
-            console.log(values)
+            if (checkStorage()) {
+
+            } else {
+                const userId = uniqid()
+                const users = [{
+                    id: userId,
+                    ...values,
+                    isLogin: true,
+                }]
+                setUserId('id', userId)
+                seUserInStorage('users', users)
+                onRegister('panel')
+            }
         }
     })
     
+    const checkStorage = () => JSON.parse(localStorage.getItem('users'))
+    const seUserInStorage = (storage, value) => localStorage.setItem(storage, JSON.stringify([ ...value ]))
+    const setUserId = (storage, userId) => localStorage.setItem(storage, userId)
+
     return (
         <Container className='d-flex justify-content-center align-items-center vh-100 px-5'>
             <Form noValidate className={styles.form} onSubmit={formik.handleSubmit}>
@@ -130,6 +146,12 @@ const RegisterForm = ({ onRegister }) => {
             </Form>
         </Container>
     )
+}
+
+// validate component
+RegisterForm.propTypes = {
+    onRegister: PropTypes.func,
+    onLogin: PropTypes.func,
 }
 
 export default RegisterForm
