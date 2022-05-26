@@ -6,11 +6,35 @@ import styles from '../Forms.module.css'
 import FormInput from '../FormInput/FormInput'
 // import other pkgs
 import { Container, Form, Button } from 'react-bootstrap'
+import { useFormik } from 'formik'
+import { object, string } from 'yup'
 
-const LoginForm = () => {
+const LoginForm = ({ onRegister }) => {
+    const [submit, setSubmit] = useState(false)
+
+    const formik = useFormik({
+        initialValues: {
+            username: '',
+            email: '',
+            password: '',
+        },
+        validationSchema: object({
+            username: string().required('please enter your username')
+                .max(15, 'your username must be 15 characters or less')
+                .min(4, 'your username must be 4 characters or more'),
+            email: string().required('please enter your email').email('invalid email'),
+            password: string().required('please enter your password')
+                .min(8, 'your password must be 8 characters or more')
+                .matches(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/, 'invalid password'),
+        }),
+        onSubmit: (values, actions) => {
+            console.log(values)
+        }
+    })
+
     return (
         <Container className='d-flex justify-content-center align-items-center vh-100 px-5'>
-            <Form noValidate className={styles.form}>
+            <Form noValidate className={styles.form} onSubmit={formik.handleSubmit}>
                 <h2>Login</h2>
 
                 <FormInput
@@ -19,10 +43,11 @@ const LoginForm = () => {
                     controlId="username-input"
                     text="Username"
                     placeholder="Enter your Username"
-                    errMsg="enter the username field correctly"
+                    errMsg={formik.errors.username}
                     successMsg="done"
-                    valid={false}
-                    invalid={false}
+                    invalid={submit && formik.errors.username ? true : false}
+                    valid={submit && !formik.errors.username ? true : false}
+                    {...formik.getFieldProps('username')}
                 />
 
                 <FormInput  
@@ -31,10 +56,11 @@ const LoginForm = () => {
                     controlId="email-input"
                     text="Email"
                     placeholder="Enter your Email"
-                    errMsg="enter the email field correctly"
+                    errMsg={formik.errors.email}
                     successMsg="done"
-                    valid={false}
-                    invalid={false}
+                    invalid={submit && formik.errors.email ? true : false}
+                    valid={submit && !formik.errors.email ? true : false}
+                    {...formik.getFieldProps('email')}
                 />
 
                 <FormInput
@@ -44,14 +70,24 @@ const LoginForm = () => {
                     text="Password"
                     placeholder="Enter your Password"
                     type="password"
-                    errMsg="enter the password field correctly"
+                    errMsg={formik.errors.password}
                     successMsg="done"
-                    valid={false}
-                    invalid={false}
+                    invalid={submit && formik.errors.password ? true : false}
+                    valid={submit && !formik.errors.password ? true : false}
+                    {...formik.getFieldProps('password')}
                 />
 
                 <Button 
+                    onClick={() => onRegister('register')}
+                    className='shadow-none mt-4 p-0'
+                    type="button"
+                    variant="">
+                    you have an account ?
+                </Button>
+
+                <Button 
                     className={`${styles["submit-btn"]}`} 
+                    onClick={() => setSubmit(true)}
                     variant="primary" 
                     type="submit" 
                     style={{ width: "100%" }}>

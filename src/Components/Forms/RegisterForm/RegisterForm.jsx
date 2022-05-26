@@ -8,7 +8,7 @@ import FormInput from '../FormInput/FormInput';
 
 // import other pkg to use
 import { useFormik } from 'formik';
-import * as Yup from 'yup'
+import { object, string, date, ref } from 'yup'
 import PropTypes from 'prop-types';
 import { v4 as uniqid } from 'uuid';
 import { Container, Button, Form } from 'react-bootstrap';
@@ -24,19 +24,19 @@ const RegisterForm = ({ onRegister, onLogin }) => {
             password: '',
             confirmPassword: '',
         },
-        validationSchema: Yup.object({
-            username: Yup.string().required('please enter your username')
+        validationSchema: object({
+            username: string().required('please enter your username')
                 .max(15, 'your username must be 15 characters or less')
                 .min(4, 'your username must be 4 characters or more'),
-            email: Yup.string().email('invalid email').required('Please enter your email'),
-            birthday: Yup.date().required('please enter your birthday date')
+            email: string().email('invalid email').required('Please enter your email'),
+            birthday: date().required('please enter your birthday date')
                 .min('1922-01-01', 'your birthday date must be 1922-01-01 or more')
                 .max('2022-05-22', 'invalid birthday date'),
-            password: Yup.string().required('please enter your password')
+            password: string().required('please enter your password')
                 .min(8, 'your password must be 8 characters or more')
                 .matches(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/, 'invalid password'),
-            confirmPassword: Yup.string().required('please enter your confirm password')
-                .oneOf([Yup.ref('password')], 'your confirm password must match'),
+            confirmPassword: string().required('please enter your confirm password')
+                .oneOf([ref('password')], 'your confirm password must match'),
         }),
         onSubmit: (values, actions) => {
             if (checkStorage()) {

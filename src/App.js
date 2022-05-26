@@ -47,7 +47,7 @@ class App extends Component {
     return (
       <>
         { this.state.toggle === "register" && <RegisterForm onRegister={this.checkUserIsRegister}  onLogin={this.changeToggle} /> }
-        { this.state.toggle === 'login' && <LoginForm /> }
+        { this.state.toggle === 'login' && <LoginForm onRegister={this.changeToggle} /> }
         { this.state.toggle === 'panel' && <Panel onLogOut={this.checkUserIsRegister} /> }
       </>
     )
