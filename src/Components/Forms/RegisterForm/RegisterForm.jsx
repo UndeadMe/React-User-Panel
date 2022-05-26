@@ -38,9 +38,27 @@ const RegisterForm = ({ onRegister, onLogin }) => {
             confirmPassword: string().required('please enter your confirm password')
                 .oneOf([ref('password')], 'your confirm password must match'),
         }),
-        onSubmit: (values, actions) => {
+        onSubmit: (values, { setFieldError }) => {
             if (checkStorage()) {
-
+                const [isIterateUsername, isIterateEmail] = checkUser(values.username, values.email)
+                
+                if (isIterateUsername) 
+                    setFieldError('username', 'please change your username')
+                else if (isIterateEmail) 
+                    setFieldError('email', 'please change your email')
+                else {
+                    const userId = uniqid()
+                    const users = checkStorage()
+                    const user = {
+                        id: userId,
+                        ...values,
+                        isLogin: true,
+                    }
+                    users.push(user)
+                    setUserId('id', userId)
+                    localStorage.setItem('users', JSON.stringify(users))
+                    onRegister()
+                }
             } else {
                 const userId = uniqid()
                 const users = [{
@@ -50,7 +68,7 @@ const RegisterForm = ({ onRegister, onLogin }) => {
                 }]
                 setUserId('id', userId)
                 seUserInStorage('users', users)
-                onRegister('panel')
+                onRegister()
             }
         }
     })
@@ -58,6 +76,14 @@ const RegisterForm = ({ onRegister, onLogin }) => {
     const checkStorage = () => JSON.parse(localStorage.getItem('users'))
     const seUserInStorage = (storage, value) => localStorage.setItem(storage, JSON.stringify([ ...value ]))
     const setUserId = (storage, userId) => localStorage.setItem(storage, userId)
+
+    const checkUser = (username, email) => {
+        const users = checkStorage()
+        const isIterateUsername = users.some(user => user.username === username)
+        const isIterateEmail = users.some(user => user.email === email)
+
+        return [isIterateUsername , isIterateEmail]
+    }
 
     return (
         <Container className='d-flex justify-content-center align-items-center vh-100 px-5'>
@@ -129,7 +155,7 @@ const RegisterForm = ({ onRegister, onLogin }) => {
                 />
 
                 <Button 
-                    onClick={() => this.props.onLogin('login')}
+                    onClick={() => onLogin('login')}
                     className='shadow-none mt-4 p-0'
                     type="button"
                     variant="">
