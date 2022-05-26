@@ -40,7 +40,7 @@ SideBarLink.propTypes = {
     text: PropTypes.string.isRequired,
     icon: PropTypes.element,
     href: PropTypes.string,
-    active: PropTypes.bool.isRequired,
+    active: PropTypes.bool,
     onActive: PropTypes.func.isRequired,
 }
 

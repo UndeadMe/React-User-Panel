@@ -129,7 +129,7 @@ class Panel extends Component {
                         </Col>
                         
                         <Col className={`${styles['panel-column']} bg-white border ms-5 p-5`}>
-                            { this.state.toggle === 'information' && <UserInformation /> }
+                            { this.state.toggle === 'information' && <UserInformation {...this.state.user} /> }
                             { this.state.toggle === 'password' && <UserChangePassword /> }
                         </Col>
                     </Row>
