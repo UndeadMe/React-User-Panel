@@ -6,7 +6,6 @@ import Titles from '../../Titles/Titles';
 // import other pkg
 import { Form, Row, Col, Button } from 'react-bootstrap';
 
-
 class UserInformation extends Component {
     render() {
         return (

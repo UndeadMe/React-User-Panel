@@ -6,11 +6,11 @@ import SideBarLinks from '../SideBarLinks/SideBarLinks'
 
 class UserCard extends Component {
     render() {
-        const  { username, userBirthday, userEmail } = this.props
+        const  { sidebarLinks, username, userBirthday, userEmail, onChangeToggle } = this.props
         return (
             <>
                 <UserProfile username={username} userBirthday={userBirthday} userEmail={userEmail} />
-                <SideBarLinks />
+                <SideBarLinks sidebarLinks={sidebarLinks} onChangeToggle={onChangeToggle} />
             </>
         )
     }

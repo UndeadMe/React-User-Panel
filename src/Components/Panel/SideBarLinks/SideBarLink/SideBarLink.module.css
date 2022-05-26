@@ -7,6 +7,9 @@
 .sidebar-link:hover .right-arrow-icon {
     transform: translateX(-10px);
 }
+.right-arrow-icon.active {
+    transform: translateX(-10px);
+}
 .sidebar-link-border {
     width: 100%;
     display: flex;

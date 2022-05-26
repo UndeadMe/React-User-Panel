@@ -8,21 +8,21 @@ import PropTypes from 'prop-types'
 
 class SideBarLink extends Component {
     render() {
-        const { border, text, icon, href } = this.props
+        const { id, border, text, icon, href, active, onActive } = this.props 
         return (
             <>
-                <li className={`${styles['sidebar-link']} d-flex justify-content-between align-items-center px-4`}>
+                <li className={`${styles['sidebar-link']} d-flex justify-content-between align-items-center px-4`} onClick={() => onActive(id)}>
                     {href ? (
                         <a href={href} className='d-flex justify-content-between w-100 align-items-center text-decoration-none text-black'>
                             {icon}
                             <span>{text}</span>
-                            <ArrowRight2 className={styles['right-arrow-icon']} size='20' color="black" />
+                            <ArrowRight2 className={`${styles['right-arrow-icon']}`} size='20' color="black" />
                         </a>
                     ) : (
                         <>
                             {icon}
-                            <span>{text}</span>
-                            <ArrowRight2 className={styles['right-arrow-icon']} size='20' color="black" />
+                            <span className={active ? 'text-primary' : 'text-black'}>{text}</span>
+                            <ArrowRight2 className={`${styles['right-arrow-icon']} ${active && styles.active}`} size='20' color="black" />
                         </>
                     )}
                 </li>
@@ -38,7 +38,9 @@ SideBarLink.propTypes = {
     border: PropTypes.bool,
     text: PropTypes.string.isRequired,
     icon: PropTypes.element,
-    href: PropTypes.string
+    href: PropTypes.string,
+    active: PropTypes.bool.isRequired,
+    onActive: PropTypes.func.isRequired,
 }
 
 export default SideBarLink

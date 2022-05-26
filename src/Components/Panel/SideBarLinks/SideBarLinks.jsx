@@ -4,18 +4,53 @@ import { Component } from "react";
 import styles from './SideBarLinks.module.css'
 // import other component to use
 import SideBarLink from "./SideBarLink/SideBarLink";
-// import other pkg 
-import { UserEdit, Lock, ProfileCircle, Code1 } from "iconsax-react";
 
 class SideBarLinks extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            links: [
+                ...this.props.sidebarLinks 
+            ]
+        }
+        this.activeLink = this.activeLink.bind(this)
+    }
+
+    activeLink(linkId) {
+        this.state.links.forEach(link => link.active = false)
+        
+        const link = this.state.links.find(link => link.id === linkId)
+        if (!link.href) {
+            link.active = true
+            
+            this.setState(prev => {
+                return {
+                    links: [
+                        ...prev.links
+                    ]
+                }
+            })
+
+            this.props.onChangeToggle(link.text.toLowerCase())
+        }
+    }
+
     render() {
         return (
             <div className={`${styles['sidebar-links']} mt-4 bg-white border px-2 py-4`}>
                 <ul className="m-0 p-0">
-                    <SideBarLink border text='Information' icon={<UserEdit size='20' color="black"/>} />
-                    <SideBarLink border text='Password' icon={<Lock size="20" color="black" />} />
-                    <SideBarLink border text='Profile' icon={ <ProfileCircle size="20" color="black" /> } />
-                    <SideBarLink href='https://github.com/' text='Github repo' icon={<Code1 size="20" color="black" />} />
+                    {this.state.links.map(link => (
+                        <SideBarLink 
+                            key={link.id}
+                            id={link.id}
+                            href={link.href} 
+                            border={link.border}
+                            text={link.text} 
+                            icon={link.icon} 
+                            active={link.active} 
+                            onActive={this.activeLink}
+                        />
+                    ))}
                 </ul>
             </div>
         )
