@@ -34,6 +34,7 @@ class SideBarLink extends Component {
 
 // validate component
 SideBarLink.propTypes = {
+    id: PropTypes.number.isRequired,
     className: PropTypes.string,
     border: PropTypes.bool,
     text: PropTypes.string.isRequired,

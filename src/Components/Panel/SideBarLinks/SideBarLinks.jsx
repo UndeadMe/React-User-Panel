@@ -4,6 +4,8 @@ import { Component } from "react";
 import styles from './SideBarLinks.module.css'
 // import other component to use
 import SideBarLink from "./SideBarLink/SideBarLink";
+// import other pkg 
+import PropTypes from 'prop-types'
 
 class SideBarLinks extends Component {
     constructor(props) {
@@ -55,6 +57,12 @@ class SideBarLinks extends Component {
             </div>
         )
     }
+}
+
+// validate the component
+SideBarLinks.propTypes = {
+    sidebarLinks: PropTypes.array.isRequired,
+    onChangeToggle: PropTypes.func.isRequired,
 }
 
 export default SideBarLinks

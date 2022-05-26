@@ -4,6 +4,8 @@ import { Component } from 'react'
 import UserProfile from '../UserProfile/UserProfile'
 import SideBarLinks from '../SideBarLinks/SideBarLinks'
 
+// import other pkg 
+import PropTypes from 'prop-types'
 class UserCard extends Component {
     render() {
         const  { sidebarLinks, username, userBirthday, userEmail, onChangeToggle } = this.props
@@ -14,6 +16,15 @@ class UserCard extends Component {
             </>
         )
     }
+}
+
+// validate the component
+UserCard.propTypes = {
+    sidebarLinks: PropTypes.array.isRequired,
+    username: PropTypes.string.isRequired,
+    userBirthday: PropTypes.string.isRequired,
+    userEmail: PropTypes.string.isRequired,
+    onChangeToggle: PropTypes.func.isRequired
 }
 
 export default UserCard
