@@ -23,7 +23,7 @@ class UserInformation extends Component {
                             controlId="first-name-input"
                             text="First Name"
                             placeholder="Enter your first name"
-                            size='md'
+                            size='sm'
                             invalid={false}
                             valid={false}
                         />
@@ -35,6 +35,7 @@ class UserInformation extends Component {
                             controlId="last-name-input"
                             text="Last Name"
                             placeholder="Enter your Last Name"
+                            size='sm'
                             invalid={false}
                             valid={false}
                         />
@@ -48,6 +49,7 @@ class UserInformation extends Component {
                             controlId="email-input"
                             text="Email"
                             placeholder="Enter your Email"
+                            size='sm'
                             invalid={false}
                             valid={false}
                         />
@@ -58,6 +60,7 @@ class UserInformation extends Component {
                             name="birthday"
                             controlId="birthday-input"
                             text="birthday"
+                            size='sm'
                             placeholder="Enter your birthday"
                             type="date"
                             invalid={false}
