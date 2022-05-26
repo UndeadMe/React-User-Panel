@@ -9,7 +9,7 @@ import { Container, Form, Button } from 'react-bootstrap'
 import { useFormik } from 'formik'
 import { object, string } from 'yup'
 
-const LoginForm = ({ onRegister }) => {
+const LoginForm = ({ onRegister, onLogin }) => {
     const [submit, setSubmit] = useState(false)
 
     const formik = useFormik({
@@ -22,15 +22,43 @@ const LoginForm = ({ onRegister }) => {
             username: string().required('please enter your username')
                 .max(15, 'your username must be 15 characters or less')
                 .min(4, 'your username must be 4 characters or more'),
-            email: string().required('please enter your email').email('invalid email'),
+            email: string().email('invalid email').required('please enter your email'),
             password: string().required('please enter your password')
                 .min(8, 'your password must be 8 characters or more')
                 .matches(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/, 'invalid password'),
         }),
-        onSubmit: (values, actions) => {
-            console.log(values)
+        onSubmit: ({ username, email, password }, { setFieldError }) => {
+            const users = getStorage('users')
+            const myVerifyUser = users.find(user => user.username === username)
+
+            if (myVerifyUser) {
+                if (myVerifyUser.email !== email) 
+                    setFieldError('email', `your email isn't true`)
+                else if (myVerifyUser.password !== password) 
+                    setFieldError('password', `your password isn't correct`)
+                else login(myVerifyUser)
+            } else
+                setFieldError('username', 'your username not found')
         }
     })
+
+    const getStorage = () => JSON.parse(localStorage.getItem('users'))
+    const setUserId = (id) => localStorage.setItem('id', id)
+
+    const login = (myVerifyUser) => {
+        const users = getStorage('users')
+        
+        const myVerifyUserIdx = users.findIndex(user => user.id === myVerifyUser.id)
+        users.splice(myVerifyUserIdx, 1)
+
+        myVerifyUser.isLogin = true
+        users.push(myVerifyUser)
+
+        localStorage.setItem('users', JSON.stringify(users))
+        
+        setUserId(myVerifyUser.id)
+        onLogin()
+    }
 
     return (
         <Container className='d-flex justify-content-center align-items-center vh-100 px-5'>
@@ -88,6 +116,7 @@ const LoginForm = ({ onRegister }) => {
                 <Button 
                     className={`${styles["submit-btn"]}`} 
                     onClick={() => setSubmit(true)}
+                    disabled={submit && !formik.isValid ? true : false}
                     variant="primary" 
                     type="submit" 
                     style={{ width: "100%" }}>

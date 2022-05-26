@@ -31,7 +31,7 @@ class App extends Component {
       
       const [userRegistered] = users.filter(user => user.id === userId)
       userRegistered.isLogin && this.changeToggle('panel')
-      userRegistered.isLogin === false && this.changeToggle('login')
+      !userRegistered.isLogin && this.changeToggle('login')
     } else this.changeToggle('register')
   }
 
@@ -47,7 +47,7 @@ class App extends Component {
     return (
       <>
         { this.state.toggle === "register" && <RegisterForm onRegister={this.checkUserIsRegister}  onLogin={this.changeToggle} /> }
-        { this.state.toggle === 'login' && <LoginForm onRegister={this.changeToggle} /> }
+        { this.state.toggle === 'login' && <LoginForm onRegister={this.changeToggle} onLogin={this.checkUserIsRegister} /> }
         { this.state.toggle === 'panel' && <Panel onLogOut={this.checkUserIsRegister} /> }
       </>
     )
