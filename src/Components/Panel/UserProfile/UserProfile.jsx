@@ -1,11 +1,11 @@
-import { Component } from 'react';
+import { PureComponent } from 'react';
 
 // import styles of this component
 import styles from './UserProfile.module.css'
 // import other pkgs
 import { Import } from 'iconsax-react'
 
-class UserProfile extends Component {
+class UserProfile extends PureComponent {
     capitalizeText(text) {
         const firstLetter = text.charAt(0).toUpperCase()
         const otherLetters = text.slice(1)
@@ -13,7 +13,7 @@ class UserProfile extends Component {
     }
 
     render() {
-        const { userProfile='img/Arash.jpg', userBirthday, username, userEmail } =this.props
+        const { userProfile='img/Arash.jpg', userBirthday, username, userEmail } = this.props
         return (
             <div className={`${styles['user-profile']} d-flex flex-column align-items-center border bg-white`}>
                 <label htmlFor="user-profile" className={styles['user-profile-label']}>
