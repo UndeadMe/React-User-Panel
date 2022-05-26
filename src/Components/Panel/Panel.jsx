@@ -16,7 +16,10 @@ class Panel extends Component {
         super(props)
         this.myVerifyUser = this.getUserFromStorage()
         this.state = {
-            ...this.initState(this.myVerifyUser)
+            user: {
+                ...this.initState(this.myVerifyUser)
+            },
+            toggle: 'information'
         }
 
         this.logOut = this.logOut.bind(this)
@@ -44,13 +47,29 @@ class Panel extends Component {
 
     updateStorage() {
         const users = JSON.parse(localStorage.getItem('users'))
-        const myVerifyUser = users.find(user => user.id === this.state.id)
-        myVerifyUser.isLogin = false
+        const myVerifyUserIdx = users.findIndex(user => user.id === this.state.user.id)
+        users.splice(myVerifyUserIdx, 1)
+        users.push(this.state.user)
         localStorage.setItem('users', JSON.stringify(users))
     }
 
     logOut() {
-        this.setState({ isLogin: false })
+        this.setState(prev => {
+            return {
+                user: {
+                    id: prev.user.id,
+                    username: prev.user.username,
+                    email: prev.user.email,
+                    password: prev.user.password,
+                    confirmPassword: prev.user.confirmPassword,
+                    birthday: prev.user.birthday,
+                    isLogin: false,
+                }
+            }
+        })
+    }
+
+    componendDidUpdate() {
         this.updateStorage()
         this.props.onLogOut()
     }
@@ -63,9 +82,9 @@ class Panel extends Component {
                     <Row className={styles['panel']}>
                         <Col xs={4}>
                             <UserCard 
-                                username={this.state.username} 
-                                userBirthday={this.state.birthday} 
-                                userEmail={this.state.email} 
+                                username={this.state.user.username} 
+                                userBirthday={this.state.user.birthday} 
+                                userEmail={this.state.user.email} 
                             />
                         </Col>
                         
