@@ -110,17 +110,16 @@ const LoginForm = ({ onRegister, onLogin }) => {
                     className='shadow-none mt-4 p-0'
                     type="button"
                     variant="">
-                    you have an account ?
+                    you dont' have any account ?
                 </Button>
 
                 <Button 
-                    className={`${styles["submit-btn"]}`} 
+                    className={`${styles["submit-btn"]} w-100`} 
                     onClick={() => setSubmit(true)}
                     disabled={submit && !formik.isValid ? true : false}
                     variant="primary" 
-                    type="submit" 
-                    style={{ width: "100%" }}>
-                    Register
+                    type="submit">
+                    Login
                 </Button>
             </Form>
         </Container>
