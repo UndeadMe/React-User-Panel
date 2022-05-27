@@ -94,9 +94,9 @@ class Panel extends PureComponent {
         this.changeUserInformation(['isLogin'], [false])
     }
 
-    componentDidUpdate(prevProps, prevState) {
+    componentDidUpdate() {
         this.updateStorage()
-        !prevState.user.isLogin && this.props.onLogOut()
+        !this.state.user.isLogin && this.props.onLogOut()
     }
 
     changeToggle(toggle) {
@@ -139,6 +139,7 @@ class Panel extends PureComponent {
                         <Col className={`${styles['panel-column']} bg-white border ms-5 p-5`}>
                             {this.state.toggle === 'information' && (
                                 <UserInformation 
+                                    username={this.state.user.username}
                                     firstName={this.state.user.firstName}
                                     lastName={this.state.user.lastName}
                                     email={this.state.user.email} 

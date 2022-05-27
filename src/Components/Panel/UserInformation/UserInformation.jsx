@@ -7,8 +7,18 @@ import { Form, Row, Col, Button } from 'react-bootstrap';
 import { useFormik } from 'formik';
 import { object, string, date } from 'yup'
 
-const UserInformation = ({ firstName, lastName, email, birthday, onChangeInfo }) => {
+const UserInformation = ({ username , firstName, lastName, email, birthday, onChangeInfo }) => {
     const [submit, setSubmit] = useState(false)
+
+    const isNotIterateEmail = (username, email) => {
+        const users = JSON.parse(localStorage.getItem('users'))
+        
+        const [isNotIterateUsername, isNotIterateEmail] = users.map(user => (
+            user.username !== username && user.email === email
+        ))
+
+        return ((!isNotIterateUsername && !isNotIterateEmail) || (isNotIterateUsername && isNotIterateEmail)) ? true : false
+    }
 
     const formik = useFormik({
         initialValues: { 
@@ -26,27 +36,32 @@ const UserInformation = ({ firstName, lastName, email, birthday, onChangeInfo })
                 .max('2022-05-22', 'invalid birthday date'),
         }),
         onSubmit: ({ firstName, lastName, email, birthday }, { setFieldError }) => {
-            if (!firstName && !lastName) {
-                onChangeInfo(
-                    ['firstName', 'lastName', 'email', 'birthday'], 
-                    ['', '', email, birthday]
-                )
-            } else if (!firstName) {
-                onChangeInfo(
-                    ['firstName' , 'lastName', 'email', 'birthday'],
-                    ['', lastName, email, birthday]
-                )
-            } else if (!lastName) {
-                onChangeInfo(
-                    ['firstName', 'lastName','email', 'birthday'],
-                    [firstName, '' , email, birthday]
-                )
-            } else {
-                onChangeInfo(
-                    ['firstName', 'lastName', 'email', 'birthday'],
-                    [firstName, lastName, email, birthday]
-                )
-            }
+            const boolIsIterateEmail =  isNotIterateEmail(username, email)
+            
+            if (boolIsIterateEmail) {
+                if (!firstName && !lastName) {
+                    onChangeInfo(
+                        ['firstName', 'lastName', 'email', 'birthday'], 
+                        ['', '', email, birthday]
+                    )
+                } else if (!firstName) {
+                    onChangeInfo(
+                        ['firstName' , 'lastName', 'email', 'birthday'],
+                        ['', lastName, email, birthday]
+                    )
+                } else if (!lastName) {
+                    onChangeInfo(
+                        ['firstName', 'lastName','email', 'birthday'],
+                        [firstName, '' , email, birthday]
+                    )
+                } else {
+                    onChangeInfo(
+                        ['firstName', 'lastName', 'email', 'birthday'],
+                        [firstName, lastName, email, birthday]
+                    )
+                }
+            } else 
+                setFieldError('email', "you can't choose this email")
         }
     })
 
