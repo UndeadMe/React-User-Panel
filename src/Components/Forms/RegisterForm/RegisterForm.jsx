@@ -112,6 +112,7 @@ const RegisterForm = ({ onRegister, onLogin }) => {
                     invalid={submit && formik.errors.email ? true : false}
                     errMsg={formik.errors.email}
                     valid={submit && !formik.errors.email ? true : false}
+                    sucessMsg="done"
                     {...formik.getFieldProps('email')}
                 />
 
@@ -125,6 +126,7 @@ const RegisterForm = ({ onRegister, onLogin }) => {
                     invalid={submit && formik.errors.birthday ? true : false}
                     errMsg={formik.errors.birthday}
                     valid={submit && !formik.errors.birthday ? true : false}
+                    successMsg="done"
                     {...formik.getFieldProps('birthday')}
                 />
 
@@ -165,6 +167,7 @@ const RegisterForm = ({ onRegister, onLogin }) => {
                 <Button 
                     className={`${styles["submit-btn"]} w-100`} 
                     onClick={() => setSubmit(true)}
+                    disabled={submit && !formik.isValid ? true : false}
                     variant="primary" 
                     type="submit">
                     Register

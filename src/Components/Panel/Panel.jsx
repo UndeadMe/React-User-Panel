@@ -1,4 +1,4 @@
-import { Component } from 'react'
+import { PureComponent } from 'react'
 import { createPortal } from 'react-dom';
 
 // import styles of this component
@@ -12,7 +12,7 @@ import { UserEdit, Lock, ProfileCircle, Code1 } from "iconsax-react";
 import { Row, Col, Container, Button } from 'react-bootstrap'
 import PropTypes from 'prop-types'
 
-class Panel extends Component {
+class Panel extends PureComponent {
     constructor(props) {
         super(props)
         this.myVerifyUser = this.getUserFromStorage()
@@ -103,7 +103,7 @@ class Panel extends Component {
         })
     }
 
-    componendDidUpdate() {
+    componentDidUpdate() {
         this.updateStorage()
         this.props.onLogOut()
     }
@@ -129,7 +129,9 @@ class Panel extends Component {
                         </Col>
                         
                         <Col className={`${styles['panel-column']} bg-white border ms-5 p-5`}>
-                            { this.state.toggle === 'information' && <UserInformation {...this.state.user} /> }
+                            {this.state.toggle === 'information' && (
+                                <UserInformation email={this.state.user.email} birthday={this.state.user.birthday} />
+                            )}
                             { this.state.toggle === 'password' && <UserChangePassword /> }
                         </Col>
                     </Row>
