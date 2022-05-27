@@ -97,7 +97,7 @@ const RegisterForm = ({ onRegister, onLogin }) => {
                     text="Username"
                     placeholder="Enter your username"
                     invalid={submit && formik.errors.username ? true : false}
-                    errMsg={formik.errors.username}
+                    errMsg={formik.errors.username || ''}
                     valid={submit && !formik.errors.username ? true : false}
                     successMsg="done"
                     {...formik.getFieldProps('username')}
@@ -110,9 +110,9 @@ const RegisterForm = ({ onRegister, onLogin }) => {
                     text="Email"
                     placeholder="Enter your Email"
                     invalid={submit && formik.errors.email ? true : false}
-                    errMsg={formik.errors.email}
+                    errMsg={formik.errors.email || ''}
                     valid={submit && !formik.errors.email ? true : false}
-                    sucessMsg="done"
+                    successMsg="done"
                     {...formik.getFieldProps('email')}
                 />
 
@@ -124,7 +124,7 @@ const RegisterForm = ({ onRegister, onLogin }) => {
                     text="birthday"
                     placeholder="Enter your birthday date"
                     invalid={submit && formik.errors.birthday ? true : false}
-                    errMsg={formik.errors.birthday}
+                    errMsg={formik.errors.birthday || ''}
                     valid={submit && !formik.errors.birthday ? true : false}
                     successMsg="done"
                     {...formik.getFieldProps('birthday')}
@@ -138,8 +138,9 @@ const RegisterForm = ({ onRegister, onLogin }) => {
                     text="Password"
                     placeholder="Enter your Password"
                     invalid={submit && formik.errors.password ? true : false}
-                    errMsg={formik.errors.password}
+                    errMsg={formik.errors.password || ''}
                     valid={submit && !formik.errors.password ? true : false}
+                    successMsg="done"
                     {...formik.getFieldProps('password')}
                 />
 
@@ -151,8 +152,9 @@ const RegisterForm = ({ onRegister, onLogin }) => {
                     text="Confirm Password"
                     placeholder="Enter your Confirm Password"
                     invalid={submit && formik.errors.confirmPassword ? true : false}
-                    errMsg={formik.errors.confirmPassword}
+                    errMsg={formik.errors.confirmPassword || ''}
                     valid={submit && !formik.errors.confirmPassword ? true : false}
+                    successMsg="done"
                     {...formik.getFieldProps('confirmPassword')}
                 />
 

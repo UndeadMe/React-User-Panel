@@ -71,7 +71,7 @@ const LoginForm = ({ onRegister, onLogin }) => {
                     controlId="username-input"
                     text="Username"
                     placeholder="Enter your Username"
-                    errMsg={formik.errors.username}
+                    errMsg={formik.errors.username || ''}
                     successMsg="done"
                     invalid={submit && formik.errors.username ? true : false}
                     valid={submit && !formik.errors.username ? true : false}
@@ -84,7 +84,7 @@ const LoginForm = ({ onRegister, onLogin }) => {
                     controlId="email-input"
                     text="Email"
                     placeholder="Enter your Email"
-                    errMsg={formik.errors.email}
+                    errMsg={formik.errors.email || ''}
                     successMsg="done"
                     invalid={submit && formik.errors.email ? true : false}
                     valid={submit && !formik.errors.email ? true : false}
@@ -98,7 +98,7 @@ const LoginForm = ({ onRegister, onLogin }) => {
                     text="Password"
                     placeholder="Enter your Password"
                     type="password"
-                    errMsg={formik.errors.password}
+                    errMsg={formik.errors.password || ''}
                     successMsg="done"
                     invalid={submit && formik.errors.password ? true : false}
                     valid={submit && !formik.errors.password ? true : false}

@@ -27,7 +27,7 @@ class FormInput extends PureComponent {
             value,
             onChange,
         } = this.props
-
+        
         return (
             <FormGroup controlId={controlId} className={className} as={as}>
                 <FormLabel className={styles['form-label']}>{text}</FormLabel>
