@@ -57,6 +57,7 @@ class Panel extends PureComponent {
 
         this.logOut = this.logOut.bind(this)
         this.changeToggle = this.changeToggle.bind(this)
+        this.changeUserInformation = this.changeUserInformation.bind(this)
     }
 
     getUserFromStorage() {
@@ -67,13 +68,15 @@ class Panel extends PureComponent {
         return myVerifyUser
     }
 
-    initState({ id, username, email, birthday, password, confirmPassword, isLogin }) {
+    initState({ id, username, email, birthday, password, confirmPassword, isLogin, firstName, lastName }) {
         return ({
             id,
             username,
             email,
             birthday,
             password,
+            firstName,
+            lastName,
             confirmPassword,
             isLogin,
         })
@@ -88,30 +91,35 @@ class Panel extends PureComponent {
     }
 
     logOut() {
-        this.setState(prev => {
-            return {
-                user: {
-                    id: prev.user.id,
-                    username: prev.user.username,
-                    email: prev.user.email,
-                    password: prev.user.password,
-                    confirmPassword: prev.user.confirmPassword,
-                    birthday: prev.user.birthday,
-                    isLogin: false,
-                }
-            }
-        })
+        this.changeUserInformation(['isLogin'], [false])
     }
 
-    componentDidUpdate() {
+    componentDidUpdate(prevProps, prevState) {
         this.updateStorage()
-        this.props.onLogOut()
+        !prevState.user.isLogin && this.props.onLogOut()
     }
 
     changeToggle(toggle) {
         this.setState({ toggle, })
     }
 
+    changeUserInformation(keyInfos, valInfos) {
+        let newInfo = {}
+
+        keyInfos.forEach((keyInfo, idx) => (
+            newInfo[keyInfo] = valInfos[idx]
+        ))
+
+        this.setState(prev => {
+            return {
+                user: {
+                    ...prev.user,
+                    ...newInfo,
+                }
+            }
+        })
+    }
+        
     render() {
         return (
             <div className={`${styles['panel-wrapper']} d-flex align-items-center`}>
@@ -130,7 +138,13 @@ class Panel extends PureComponent {
                         
                         <Col className={`${styles['panel-column']} bg-white border ms-5 p-5`}>
                             {this.state.toggle === 'information' && (
-                                <UserInformation email={this.state.user.email} birthday={this.state.user.birthday} />
+                                <UserInformation 
+                                    firstName={this.state.user.firstName}
+                                    lastName={this.state.user.lastName}
+                                    email={this.state.user.email} 
+                                    birthday={this.state.user.birthday} 
+                                    onChangeInfo={this.changeUserInformation}
+                                />
                             )}
                             { this.state.toggle === 'password' && <UserChangePassword /> }
                         </Col>

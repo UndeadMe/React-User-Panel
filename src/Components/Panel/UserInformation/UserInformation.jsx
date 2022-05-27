@@ -7,28 +7,46 @@ import { Form, Row, Col, Button } from 'react-bootstrap';
 import { useFormik } from 'formik';
 import { object, string, date } from 'yup'
 
-const UserInformation = ({ email, birthday }) => {
+const UserInformation = ({ firstName, lastName, email, birthday, onChangeInfo }) => {
     const [submit, setSubmit] = useState(false)
 
     const formik = useFormik({
         initialValues: { 
-            firstName: '',
-            lastName: '',
+            firstName: firstName ? firstName : '',
+            lastName: lastName ? lastName : '',
             email,
             birthday,
         },
         validationSchema: object({
-            firstName: string().required('please enter your first name')
-                .max(10, 'your fisrt name must be 10 or less'),
-            lastName: string().required('please enter your first name')
-                .max(10, 'your fisrt name must be 10 or less'),
+            firstName: string().max(10, 'your fisrt name must be 10 or less'),
+            lastName: string().max(10, 'your fisrt name must be 10 or less'),
             email: string().required('please enter your email').email('invalid email'),
             birthday: date().required('please enter your birthday date')
                 .min('1922-01-01', 'your birthday date must be 1922-01-01 or more')
                 .max('2022-05-22', 'invalid birthday date'),
         }),
-        onSubmit: () => {
-
+        onSubmit: ({ firstName, lastName, email, birthday }, { setFieldError }) => {
+            if (!firstName && !lastName) {
+                onChangeInfo(
+                    ['email', 'birthday'], 
+                    [email, birthday]
+                )
+            } else if (!firstName) {
+                onChangeInfo(
+                    ['lastName', 'email', 'birthday'],
+                    [lastName, email, birthday]
+                )
+            } else if (!lastName) {
+                onChangeInfo(
+                    ['firstName', 'email', 'birthday'],
+                    [firstName, email, birthday]
+                )
+            } else {
+                onChangeInfo(
+                    ['firstName', 'lastName', 'email', 'birthday'],
+                    [firstName, lastName, email, birthday]
+                )
+            }
         }
     })
 
@@ -47,9 +65,13 @@ const UserInformation = ({ email, birthday }) => {
                         text="First Name"
                         placeholder='Arash'
                         size='sm'
-                        invalid={submit && formik.errors.firstName ? true : false}
+                        invalid={formik.values.firstName === '' ? false : (
+                            submit && formik.errors.firstName ? true : false
+                        )}
                         errMsg={formik.errors.firstName || ''}
-                        valid={submit && !formik.errors.firstName ? true : false}
+                        valid={formik.values.firstName === '' ? false : (
+                            submit && !formik.errors.firstName ? true : false
+                        )}
                         successMsg="done"
                         {...formik.getFieldProps('firstName')}
                     />
@@ -62,9 +84,13 @@ const UserInformation = ({ email, birthday }) => {
                         text="Last Name"
                         placeholder="Karimi"
                         size='sm'
-                        invalid={submit && formik.errors.lastName ? true : false}
+                        invalid={formik.values.lastName === '' ? false : (
+                            submit && formik.errors.lastName ? true : false
+                        )}
                         errMsg={formik.errors.lastName || ''}
-                        valid={submit && !formik.errors.lastName ? true : false}
+                        valid={formik.values.lastName === '' ? false : (
+                            submit && !formik.errors.lastName ? true : false
+                        )}
                         successMsg="done"
                         {...formik.getFieldProps('lastName')}
                     />
@@ -105,6 +131,7 @@ const UserInformation = ({ email, birthday }) => {
                 </Row>
                 <Button 
                     onClick={() => setSubmit(true)}
+                    disabled={submit && !formik.isValid ? true : false}
                     variant="primary" className='mt-5 py-2 px-4'
                     type="submit">
                     Update
