@@ -28,18 +28,18 @@ const UserInformation = ({ firstName, lastName, email, birthday, onChangeInfo })
         onSubmit: ({ firstName, lastName, email, birthday }, { setFieldError }) => {
             if (!firstName && !lastName) {
                 onChangeInfo(
-                    ['email', 'birthday'], 
-                    [email, birthday]
+                    ['firstName', 'lastName', 'email', 'birthday'], 
+                    ['', '', email, birthday]
                 )
             } else if (!firstName) {
                 onChangeInfo(
-                    ['lastName', 'email', 'birthday'],
-                    [lastName, email, birthday]
+                    ['firstName' , 'lastName', 'email', 'birthday'],
+                    ['', lastName, email, birthday]
                 )
             } else if (!lastName) {
                 onChangeInfo(
-                    ['firstName', 'email', 'birthday'],
-                    [firstName, email, birthday]
+                    ['firstName', 'lastName','email', 'birthday'],
+                    [firstName, '' , email, birthday]
                 )
             } else {
                 onChangeInfo(
