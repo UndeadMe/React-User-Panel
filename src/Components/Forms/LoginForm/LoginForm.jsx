@@ -2,12 +2,17 @@ import { useState } from 'react'
 
 // import styles of this component
 import styles from '../Forms.module.css'
+
 // import other component
 import FormInput from '../FormInput/FormInput'
+
 // import other pkgs
 import { Container, Form, Button } from 'react-bootstrap'
 import { useFormik } from 'formik'
 import { object, string } from 'yup'
+
+// import utils 
+import { getStorage, setUserId, updateStorage } from '../../../utils/storage'
 
 const LoginForm = ({ onRegister, onLogin }) => {
     const [submit, setSubmit] = useState(false)
@@ -29,33 +34,23 @@ const LoginForm = ({ onRegister, onLogin }) => {
         }),
         onSubmit: ({ username, email, password }, { setFieldError }) => {
             const users = getStorage('users')
-            const myVerifyUser = users.find(user => user.username === username)
-
-            if (myVerifyUser) {
-                if (myVerifyUser.email !== email) 
+            const myVerifyUser = users && users.find(user => user.username === username)
+            
+            if (users && myVerifyUser) {
+                if (myVerifyUser.email === email && myVerifyUser.password === password)
+                    login(myVerifyUser)
+                else if (myVerifyUser.email !== email)
                     setFieldError('email', `your email isn't true`)
-                else if (myVerifyUser.password !== password) 
+                else 
                     setFieldError('password', `your password isn't correct`)
-                else login(myVerifyUser)
             } else
                 setFieldError('username', 'your username not found')
         }
     })
 
-    const getStorage = () => JSON.parse(localStorage.getItem('users'))
-    const setUserId = (id) => localStorage.setItem('id', id)
-
     const login = (myVerifyUser) => {
         const users = getStorage('users')
-        
-        const myVerifyUserIdx = users.findIndex(user => user.id === myVerifyUser.id)
-        users.splice(myVerifyUserIdx, 1)
-
-        myVerifyUser.isLogin = true
-        users.push(myVerifyUser)
-
-        localStorage.setItem('users', JSON.stringify(users))
-        
+        updateStorage(users, myVerifyUser, true)
         setUserId(myVerifyUser.id)
         onLogin()
     }

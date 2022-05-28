@@ -13,6 +13,9 @@ import PropTypes from 'prop-types';
 import { v4 as uniqid } from 'uuid';
 import { Container, Button, Form } from 'react-bootstrap';
 
+// import utils 
+import { getStorage, setUserId, setUserInStorage } from '../../../utils/storage';
+
 const RegisterForm = ({ onRegister, onLogin }) => {
     const [submit, setSubmit] = useState(false)
 
@@ -39,7 +42,7 @@ const RegisterForm = ({ onRegister, onLogin }) => {
                 .oneOf([ref('password')], 'your confirm password must match'),
         }),
         onSubmit: (values, { setFieldError }) => {
-            if (checkStorage()) {
+            if (getStorage('users')) {
                 const [isIterateUsername, isIterateEmail] = checkUser(values.username, values.email)
                 
                 if (isIterateUsername) 
@@ -48,37 +51,27 @@ const RegisterForm = ({ onRegister, onLogin }) => {
                     setFieldError('email', 'please change your email')
                 else {
                     const userId = uniqid()
-                    const users = checkStorage()
-                    const user = {
-                        id: userId,
-                        ...values,
-                        isLogin: true,
-                    }
+                    const users = getStorage('users')
+                    const user = { id: userId, ...values, isLogin: true, }
                     users.push(user)
-                    setUserId('id', userId)
-                    localStorage.setItem('users', JSON.stringify(users))
+
+                    setUserId(userId)
+                    setUserInStorage('users', users)
                     onRegister()
                 }
             } else {
                 const userId = uniqid()
-                const users = [{
-                    id: userId,
-                    ...values,
-                    isLogin: true,
-                }]
-                setUserId('id', userId)
-                seUserInStorage('users', users)
+                const users = [{ id: userId, ...values, isLogin: true, }]
+                
+                setUserId(userId)
+                setUserInStorage('users', users)
                 onRegister()
             }
         }
     })
-    
-    const checkStorage = () => JSON.parse(localStorage.getItem('users'))
-    const seUserInStorage = (storage, value) => localStorage.setItem(storage, JSON.stringify([ ...value ]))
-    const setUserId = (storage, userId) => localStorage.setItem(storage, userId)
 
-    const checkUser = (username, email) => {
-        const users = checkStorage()
+    const checkUser = (username, email) => { // TODO: refactor 
+        const users = getStorage('users')
         const isIterateUsername = users.some(user => user.username === username)
         const isIterateEmail = users.some(user => user.email === email)
 

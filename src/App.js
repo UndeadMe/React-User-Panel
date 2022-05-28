@@ -7,6 +7,9 @@ import RegisterForm from './Components/Forms/RegisterForm/RegisterForm'
 import Panel from './Components/Panel/Panel';
 import LoginForm from './Components/Forms/LoginForm/LoginForm';
 
+// import utils
+import { getStorage } from './utils/storage';
+
 class App extends Component {
   constructor(props) {
     super(props)
@@ -26,17 +29,18 @@ class App extends Component {
 
   checkUserIsRegister() {
     if (this.checkIsInitStorage()) {
-      const userId = localStorage.getItem("id")
-      const users = JSON.parse(localStorage.getItem("users"))
+      const userId = getStorage('id')
+      const users = getStorage('users')
       
-      const [userRegistered] = users.filter(user => user.id === userId)
+      const [ userRegistered ] = users.filter(user => user.id === userId)
+
       userRegistered.isLogin && this.changeToggle('panel')
       !userRegistered.isLogin && this.changeToggle('login')
     } else this.changeToggle('register')
   }
 
   checkIsInitStorage() {
-    return JSON.parse(localStorage.getItem("users")) && JSON.parse(localStorage.getItem("users")).length !== 0
+    return getStorage('users') && getStorage('users').length !== 0
   }
 
   componentDidMount() {
