@@ -4,6 +4,7 @@ import { PureComponent } from 'react';
 import styles from './UserProfile.module.css'
 // import other pkgs
 import { Import } from 'iconsax-react'
+import PropTypes from 'prop-types';
 
 class UserProfile extends PureComponent {
     capitalizeText(text) {
@@ -29,6 +30,14 @@ class UserProfile extends PureComponent {
             </div>
         )
     }
+}
+
+// validate the component
+UserProfile.propTypes = {
+    userProfile: PropTypes.string,
+    username: PropTypes.string.isRequired,
+    userBirthday: PropTypes.string.isRequired,
+    userEmail: PropTypes.string.isRequired,
 }
 
 export default UserProfile
