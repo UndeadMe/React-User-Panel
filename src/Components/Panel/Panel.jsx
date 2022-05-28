@@ -71,8 +71,8 @@ class Panel extends PureComponent {
         return myVerifyUser
     }
 
-    initState({ id, username, email, birthday, password, confirmPassword, isLogin, firstName, lastName }) {
-        return ({ id, username, email, birthday, password, firstName, lastName, confirmPassword, isLogin, })
+    initState({ id, username, email, birthday, password, isLogin, firstName, lastName }) {
+        return ({ id, username, email, birthday, password, firstName, lastName, isLogin, })
     }
 
     logOut() {
@@ -111,7 +111,7 @@ class Panel extends PureComponent {
                 <div className={styles['bg-overlay']}></div>
                 <Container className="d-flex align-items-center justify-content-center">
                     <Row className={styles['panel']}>
-                        <Col xs={4}>
+                            <Col xs={4} className="d-flex flex-column justify-content-center">
                             <UserCard 
                                 username={this.state.user.username} 
                                 userBirthday={this.state.user.birthday} 
@@ -132,7 +132,12 @@ class Panel extends PureComponent {
                                     onChangeInfo={this.changeUserInformation}
                                 />
                             )}
-                            { this.state.toggle === 'password' && <UserChangePassword /> }
+                            {this.state.toggle === 'password' && (
+                                <UserChangePassword 
+                                    password={this.state.user.password}
+                                    onChangeInfo={this.changeUserInformation} 
+                                />
+                            )}
                         </Col>
                     </Row>
                 </Container>
