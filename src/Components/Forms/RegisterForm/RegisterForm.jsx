@@ -70,7 +70,7 @@ const RegisterForm = ({ onRegister, onLogin }) => {
         }
     })
 
-    const checkUser = (username, email) => { // TODO: refactor 
+    const checkUser = (username, email) => {
         const users = getStorage('users')
         const isIterateUsername = users.some(user => user.username === username)
         const isIterateEmail = users.some(user => user.email === email)

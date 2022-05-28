@@ -1,17 +1,21 @@
 import { useState } from 'react';
+
 // import other component
 import FormInput from '../../Forms/FormInput/FormInput';
 import Titles from '../../Titles/Titles';
+
 // import other pkg
 import { Form, Row, Col, Button } from 'react-bootstrap';
 import { useFormik } from 'formik';
 import { object, string, date } from 'yup'
+import { getStorage } from '../../../utils/storage';
+
 
 const UserInformation = ({ username , firstName, lastName, email, birthday, onChangeInfo }) => {
     const [submit, setSubmit] = useState(false)
 
     const isNotIterateEmail = (username, email) => {
-        const users = JSON.parse(localStorage.getItem('users'))
+        const users = getStorage('users')
         
         const [isNotIterateUsername, isNotIterateEmail] = users.map(user => (
             user.username !== username && user.email === email
@@ -21,7 +25,7 @@ const UserInformation = ({ username , firstName, lastName, email, birthday, onCh
     }
 
     const formik = useFormik({
-        initialValues: { 
+        initialValues: {
             firstName: firstName ? firstName : '',
             lastName: lastName ? lastName : '',
             email,
