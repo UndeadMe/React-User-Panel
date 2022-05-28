@@ -8,6 +8,9 @@ import Titles from '../../Titles/Titles';
 import { Form, Row, Col, Button } from 'react-bootstrap';
 import { useFormik } from 'formik';
 import { object, string, date } from 'yup'
+import PropTypes from 'prop-types';
+
+// import utils
 import { getStorage } from '../../../utils/storage';
 
 
@@ -158,6 +161,16 @@ const UserInformation = ({ username , firstName, lastName, email, birthday, onCh
             </Form>
         </>
     )
+}
+
+// validate the component
+UserInformation.propTypes = {
+    username: PropTypes.string.isRequired, 
+    firstName: PropTypes.string.isRequired,
+    lastName: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired, 
+    birthday: PropTypes.string.isRequired, 
+    onChangeInfo: PropTypes.func.isRequired,
 }
 
 export default UserInformation
