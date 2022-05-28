@@ -3,14 +3,19 @@ import { createPortal } from 'react-dom';
 
 // import styles of this component
 import styles from './Panel.module.css'
+
 // import other component
 import UserCard from './UserCard/UserCard'
 import UserInformation from './UserInformation/UserInformation'
 import UserChangePassword from './UserChangePassword/UserChangePassword'
+
 // import other pkgs
 import { UserEdit, Lock, ProfileCircle, Code1 } from "iconsax-react";
 import { Row, Col, Container, Button } from 'react-bootstrap'
 import PropTypes from 'prop-types'
+
+// import utils
+import { getStorage, updateStorage } from './../../utils/storage';
 
 class Panel extends PureComponent {
     constructor(props) {
@@ -18,9 +23,7 @@ class Panel extends PureComponent {
         this.myVerifyUser = this.getUserFromStorage()
         
         this.state = {
-            user: {
-                ...this.initState(this.myVerifyUser)
-            },
+            user: {...this.initState(this.myVerifyUser)},
             toggle: 'information',
         }
         
@@ -61,33 +64,15 @@ class Panel extends PureComponent {
     }
 
     getUserFromStorage() {
-        const users = JSON.parse(localStorage.getItem('users'))
-        const userId = localStorage.getItem("id")
+        const users = getStorage('users')
+        const userId = getStorage('id')
         const myVerifyUser = users.find(user => user.id === userId)
         
         return myVerifyUser
     }
 
     initState({ id, username, email, birthday, password, confirmPassword, isLogin, firstName, lastName }) {
-        return ({
-            id,
-            username,
-            email,
-            birthday,
-            password,
-            firstName,
-            lastName,
-            confirmPassword,
-            isLogin,
-        })
-    }
-
-    updateStorage() {
-        const users = JSON.parse(localStorage.getItem('users'))
-        const myVerifyUserIdx = users.findIndex(user => user.id === this.state.user.id)
-        users.splice(myVerifyUserIdx, 1)
-        users.push(this.state.user)
-        localStorage.setItem('users', JSON.stringify(users))
+        return ({ id, username, email, birthday, password, firstName, lastName, confirmPassword, isLogin, })
     }
 
     logOut() {
@@ -95,12 +80,12 @@ class Panel extends PureComponent {
     }
 
     componentDidUpdate() {
-        this.updateStorage()
+        updateStorage(getStorage('users'), this.state.user)
         !this.state.user.isLogin && this.props.onLogOut()
     }
 
     changeToggle(toggle) {
-        this.setState({ toggle, })
+        this.setState({ toggle })
     }
 
     changeUserInformation(keyInfos, valInfos) {
