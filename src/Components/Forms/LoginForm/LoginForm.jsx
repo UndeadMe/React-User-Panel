@@ -10,6 +10,7 @@ import FormInput from '../FormInput/FormInput'
 import { Container, Form, Button } from 'react-bootstrap'
 import { useFormik } from 'formik'
 import { object, string } from 'yup'
+import PropTypes from 'prop-types'
 
 // import utils 
 import { getStorage, setUserId, updateStorage } from '../../../utils/storage'
@@ -119,6 +120,12 @@ const LoginForm = ({ onRegister, onLogin }) => {
             </Form>
         </Container>
     )
+}
+
+// validate the component
+LoginForm.propTypes = {
+    onRegister: PropTypes.func.isRequired, 
+    onLogin: PropTypes.func.isRequired,
 }
 
 export default LoginForm
