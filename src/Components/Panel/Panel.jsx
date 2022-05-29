@@ -90,7 +90,7 @@ class Panel extends PureComponent {
 
     changeUserInformation(keyInfos, valInfos) {
         let newInfo = {}
-
+        
         keyInfos.forEach((keyInfo, idx) => (
             newInfo[keyInfo] = valInfos[idx]
         ))
@@ -107,11 +107,11 @@ class Panel extends PureComponent {
         
     render() {
         return (
-            <div className={`${styles['panel-wrapper']} d-flex align-items-center`}>
-                <div className={styles['bg-overlay']}></div>
-                <Container className="d-flex align-items-center justify-content-center">
-                    <Row className={styles['panel']}>
-                            <Col xs={4} className="d-flex flex-column justify-content-center">
+            <div className={`${styles['panel-wrapper']} d-flex align-items-center justify-content-center`}>
+                {/* <div className={styles['bg-overlay']}></div> TODO */} 
+                <div className={`${styles.container} d-flex justify-content-center align-items-center p-0`}>
+                    <Row className={`${styles['panel']} flex-column flex-md-row justify-content-center align-items-center px-3`}>
+                        <Col xs={12} sm={8} md={4} className="d-flex flex-column justify-content-center p-0">
                             <UserCard 
                                 username={this.state.user.username} 
                                 userBirthday={this.state.user.birthday} 
@@ -121,7 +121,7 @@ class Panel extends PureComponent {
                             />
                         </Col>
                         
-                        <Col className={`${styles['panel-column']} bg-white border ms-5 p-5`}>
+                        <Col xs={12} sm={8} md={7} className={`${styles['panel-column']} bg-white border mt-5 mt-md-0 ms-md-5 p-5`}>
                             {this.state.toggle === 'information' && (
                                 <UserInformation 
                                     username={this.state.user.username}
@@ -140,7 +140,7 @@ class Panel extends PureComponent {
                             )}
                         </Col>
                     </Row>
-                </Container>
+                </div >
                 {createPortal((
                     <Button 
                         variant="primary" 

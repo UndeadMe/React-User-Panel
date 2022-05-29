@@ -26,10 +26,14 @@ class FormInput extends PureComponent {
             size='md',
             value,
             onChange,
+            xs,
+            sm,
+            md,
+            lg,
         } = this.props
         
         return (
-            <FormGroup controlId={controlId} className={className} as={as}>
+            <FormGroup controlId={controlId} className={className} as={as} xs={xs} sm={sm} md={md} lg={lg}>
                 <FormLabel className={styles['form-label']}>{text}</FormLabel>
                 <FormControl 
                     isInvalid={invalid}

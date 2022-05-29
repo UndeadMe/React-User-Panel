@@ -79,6 +79,8 @@ const UserInformation = ({ username , firstName, lastName, email, birthday, onCh
             <Form noValidate onSubmit={formik.handleSubmit}>
                 <Row className="mt-5 px-3">
                     <FormInput 
+                        xs={12}
+                        lg
                         as={Col}
                         inpClass='py-2'
                         className="p-0"
@@ -98,9 +100,11 @@ const UserInformation = ({ username , firstName, lastName, email, birthday, onCh
                         {...formik.getFieldProps('firstName')}
                     />
                     <FormInput 
+                        xs={12}
+                        lg
                         as={Col}
                         inpClass='py-2'
-                        className="p-0 ms-5"
+                        className="p-0 ms-lg-5 mt-3 mt-lg-0"
                         name="lastName"
                         controlId="last-name-input"
                         text="Last Name"
@@ -118,8 +122,10 @@ const UserInformation = ({ username , firstName, lastName, email, birthday, onCh
                     />
                 </Row>
 
-                <Row className="mt-4 px-3">
+                <Row className="mt-3 mt-lg-4 px-3">
                     <FormInput 
+                        xs={12}
+                        lg
                         as={Col}
                         inpClass='py-2'
                         className="p-0"
@@ -135,9 +141,11 @@ const UserInformation = ({ username , firstName, lastName, email, birthday, onCh
                         {...formik.getFieldProps('email')}
                     />
                     <FormInput 
+                        xs={12}
+                        lg
                         as={Col}
                         inpClass='py-2'
-                        className="p-0 ms-5"
+                        className="p-0 ms-lg-5 mt-3 mt-lg-0"
                         name="birthday"
                         controlId="birthday-input"
                         text="birthday"
