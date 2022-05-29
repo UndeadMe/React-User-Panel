@@ -57,7 +57,7 @@ const LoginForm = ({ onRegister, onLogin }) => {
     }
 
     return (
-        <Container className='d-flex justify-content-center align-items-center vh-100 px-5'>
+        <Container fluid className={`${styles.container} d-flex justify-content-center align-items-center px-5`}>
             <Form noValidate className={styles.form} onSubmit={formik.handleSubmit}>
                 <h2>Login</h2>
 
