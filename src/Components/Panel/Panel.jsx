@@ -11,7 +11,7 @@ import UserChangePassword from './UserChangePassword/UserChangePassword'
 
 // import other pkgs
 import { UserEdit, Lock, ProfileCircle, Code1 } from "iconsax-react";
-import { Row, Col, Container, Button } from 'react-bootstrap'
+import { Row, Col, Button } from 'react-bootstrap'
 import PropTypes from 'prop-types'
 
 // import utils
