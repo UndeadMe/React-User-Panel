@@ -1,5 +1,3 @@
-import { PureComponent } from 'react';
-
 // import styles of this component
 import styles from './UserProfile.module.css'
 // import other pkgs
