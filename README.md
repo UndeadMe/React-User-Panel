@@ -1,5 +1,5 @@
 # User Panel Usgin React ✨🔥
-a couple of days ago I decided to do this project for myself as practice.This user panel created by react js and I used Formik and Yup for easier validate the inputs 🙂🎈 and I wanted just focus on the logic so I used react bootstrap to design the all of page.
+a few days ago I decided to do this project for myself as practice.This user panel created by react js containing  Formik and Yup for easier  input validation 🙂🎈 and I just wanted to focus on  logic so I used react bootstrap to design the whole  pages.
 
 # pages 
  login
