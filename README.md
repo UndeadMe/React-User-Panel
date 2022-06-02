@@ -35,7 +35,7 @@ this page is for the users and all the data has to be dynamic. users can change 
 ![Screenshot 2022-06-02 131611](https://user-images.githubusercontent.com/89915857/171592343-fc263921-41a8-4db5-adfc-1adc6e935a04.png)
 
 
-## Features
+# Features
 - [x] Users can change their information
 - [x] simple ui design
 - [x] responsive
