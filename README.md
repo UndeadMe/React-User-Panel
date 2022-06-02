@@ -38,5 +38,6 @@ this page is for the users and all the data has to be dynamic. users can change 
 ## Features
 - [x] Users can change their information
 - [x] simple ui design
+- [x] responsive
 - [ ] users can upload their own profiles and banner
 - [x] Users can set their first name and last name
