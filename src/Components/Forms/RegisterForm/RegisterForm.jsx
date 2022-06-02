@@ -37,7 +37,7 @@ const RegisterForm = ({ onRegister, onLogin }) => {
                 .max('2022-05-22', 'invalid birthday date'),
             password: string().required('please enter your password')
                 .min(8, 'your password must be 8 characters or more')
-                .matches(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/, 'invalid password'),
+                .matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/, 'invalid password'),
             confirmPassword: string().required('please enter your confirm password')
                 .oneOf([ref('password')], 'your confirm password must match'),
         }),

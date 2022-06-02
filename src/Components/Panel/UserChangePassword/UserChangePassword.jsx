@@ -21,14 +21,14 @@ const UserChangePassword = ({ password, onChangeInfo }) => {
         validationSchema: object({
             currentPassword: string().required('please enter your current password')
                 .min(8, 'your current password must be 8 characters or more')
-                .matches(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/, 'invalid password'),
+                .matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/, 'invalid password'),
                 
             newPassword: string().required('please enter your new password')
                 .min(8, 'your new password must be 8 characters or more')
-                .matches(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/, 'invalid password'),
+                .matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/, 'invalid password'),
 
             confirmNewPassword: string().required('please enter your confirm new password')
-                .matches(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/, 'invalid password')
+                .matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/, 'invalid password')
                 .oneOf([ref('newPassword')], 'your confirm new password must match')
         }),
         onSubmit: (values, { setFieldError }) => {
