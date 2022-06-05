@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
 // import bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -14,26 +14,26 @@ import { getStorage } from './utils/storage';
 const App = () => {
   const [toggle, setToggle] = useState('');
     
-  useEffect(() => {
-    checkUserIsRegister()
-    // eslint-disable-next-line
-  }, [])
-  
   const changeToggle = (toggle) => setToggle(toggle)
   
   const checkIsInitStorage = () => getStorage('users') && getStorage('users').length !== 0
   
-  const checkUserIsRegister = () => {
+  const checkUserIsRegister = useCallback(() => {
     if (checkIsInitStorage()) {
       const userId = getStorage('id')
       const users = getStorage('users')
       
-      const [ userRegistered ] = users.filter(user => user.id === userId)
+      const [userRegistered] = users.filter(user => user.id === userId)
       
       userRegistered.isLogin && changeToggle('panel')
       !userRegistered.isLogin && changeToggle('login')
     } else changeToggle('register')
-  }
+  }, [])
+
+  useEffect(() => {
+    checkUserIsRegister()
+  }, [checkUserIsRegister])
+  
   
   return (
     <>
