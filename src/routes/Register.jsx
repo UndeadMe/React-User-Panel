@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 
 // import styles of this component
 import styles from '../Components/Forms/Forms.module.css'
@@ -9,7 +10,6 @@ import FormInput from '../Components/Forms/FormInput/FormInput';
 // import other pkg to use
 import { useFormik } from 'formik';
 import { object, string, date, ref } from 'yup'
-import PropTypes from 'prop-types';
 import { v4 as uniqid } from 'uuid';
 import { Container, Button, Form } from 'react-bootstrap';
 
@@ -18,6 +18,7 @@ import { getStorage, setUserId, setUserInStorage } from '../utils/storage';
 
 const Register = ({ onRegister, onLogin }) => {
     const [submit, setSubmit] = useState(false)
+    const navigate = useNavigate()
 
     const formik = useFormik({
         initialValues: {
@@ -39,6 +40,8 @@ const Register = ({ onRegister, onLogin }) => {
                 .min(8, 'your password must be 8 characters or more')
                 .matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/, 'invalid password'),
             confirmPassword: string().required('please enter your confirm password')
+                .min(8, 'your password must be 8 characters or more')
+                .matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/, 'invalid password')
                 .oneOf([ref('password')], 'your confirm password must match'),
         }),
         onSubmit: (values, { setFieldError }) => {
@@ -57,7 +60,7 @@ const Register = ({ onRegister, onLogin }) => {
 
                     setUserId(userId)
                     setUserInStorage('users', users)
-                    onRegister()
+                    navigate('/panel')
                 }
             } else {
                 const userId = uniqid()
@@ -65,7 +68,7 @@ const Register = ({ onRegister, onLogin }) => {
                 
                 setUserId(userId)
                 setUserInStorage('users', users)
-                onRegister()
+                navigate('/panel')
             }
         }
     })
@@ -151,13 +154,11 @@ const Register = ({ onRegister, onLogin }) => {
                     {...formik.getFieldProps('confirmPassword')}
                 />
 
-                <Button 
-                    onClick={() => onLogin('login')}
-                    className='shadow-none mt-4 p-0'
-                    type="button"
-                    variant="">
+                <Link 
+                    to="/login"
+                    className='shadow-none text-decoration-none mt-4 p-0'>
                     you have an account ?
-                </Button>
+                </Link>
 
                 <Button 
                     className={`${styles["submit-btn"]} w-100`} 
@@ -170,12 +171,6 @@ const Register = ({ onRegister, onLogin }) => {
             </Form>
         </Container>
     )
-}
-
-// validate component
-Register.propTypes = {
-    onRegister: PropTypes.func.isRequired,
-    onLogin: PropTypes.func.isRequired,
 }
 
 export default Register

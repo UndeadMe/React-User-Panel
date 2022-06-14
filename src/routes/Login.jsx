@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useNavigate, Link } from 'react-router-dom';
 
 // import styles of this component
 import styles from '../Components/Forms/Forms.module.css'
@@ -17,6 +18,7 @@ import { getStorage, setUserId, updateStorage } from '../utils/storage'
 
 const Login = ({ onRegister, onLogin }) => {
     const [submit, setSubmit] = useState(false)
+    const navigate = useNavigate()
 
     const formik = useFormik({
         initialValues: {
@@ -53,7 +55,7 @@ const Login = ({ onRegister, onLogin }) => {
         const users = getStorage('users')
         updateStorage(users, myVerifyUser, true)
         setUserId(myVerifyUser.id)
-        onLogin()
+        navigate('/')
     }
 
     return (
@@ -101,13 +103,11 @@ const Login = ({ onRegister, onLogin }) => {
                     {...formik.getFieldProps('password')}
                 />
 
-                <Button 
-                    onClick={() => onRegister('register')}
-                    className='shadow-none mt-4 p-0'
-                    type="button"
-                    variant="">
+                <Link
+                    to="/register"
+                    className='shadow-none text-decoration-none mt-4 p-0'>
                     you dont' have any account ?
-                </Button>
+                </Link>
 
                 <Button 
                     className={`${styles["submit-btn"]} w-100`} 
