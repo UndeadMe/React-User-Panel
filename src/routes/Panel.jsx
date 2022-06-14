@@ -2,12 +2,12 @@ import { PureComponent } from 'react'
 import { createPortal } from 'react-dom';
 
 // import styles of this component
-import styles from './Panel.module.css'
+import styles from '../Components/Panel/Panel.module.css'
 
 // import other component
-import UserCard from './UserCard/UserCard'
-import UserInformation from './UserInformation/UserInformation'
-import UserChangePassword from './UserChangePassword/UserChangePassword'
+import UserCard from '../Components/Panel/UserCard/UserCard'
+import UserInformation from '../Components/Panel/UserInformation/UserInformation'
+import UserChangePassword from '../Components/Panel/UserChangePassword/UserChangePassword'
 
 // import other pkgs
 import { UserEdit, Lock, ProfileCircle, Code1 } from "iconsax-react";
@@ -15,7 +15,7 @@ import { Row, Col, Button } from 'react-bootstrap'
 import PropTypes from 'prop-types'
 
 // import utils
-import { getStorage, updateStorage } from './../../utils/storage';
+import { getStorage, updateStorage } from '../utils/storage';
 
 class Panel extends PureComponent {
     constructor(props) {
