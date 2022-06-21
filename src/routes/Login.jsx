@@ -11,12 +11,11 @@ import FormInput from '../Components/Forms/FormInput/FormInput'
 import { Container, Form, Button } from 'react-bootstrap'
 import { useFormik } from 'formik'
 import { object, string } from 'yup'
-import PropTypes from 'prop-types'
 
 // import utils 
 import { getStorage, setUserId, updateStorage } from '../utils/storage'
 
-const Login = ({ onRegister, onLogin }) => {
+const Login = () => {
     const [submit, setSubmit] = useState(false)
     const navigate = useNavigate()
 
@@ -47,7 +46,7 @@ const Login = ({ onRegister, onLogin }) => {
                 else 
                     setFieldError('password', `your password isn't correct`)
             } else
-                setFieldError('username', 'your username not found')
+                setFieldError('username', `please register first`)
         }
     })
 
@@ -120,12 +119,6 @@ const Login = ({ onRegister, onLogin }) => {
             </Form>
         </Container>
     )
-}
-
-// validate the component
-Login.propTypes = {
-    onRegister: PropTypes.func.isRequired, 
-    onLogin: PropTypes.func.isRequired,
 }
 
 export default Login

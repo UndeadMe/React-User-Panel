@@ -16,7 +16,7 @@ import { Container, Button, Form } from 'react-bootstrap';
 // import utils 
 import { getStorage, setUserId, setUserInStorage } from '../utils/storage';
 
-const Register = ({ onRegister, onLogin }) => {
+const Register = () => {
     const [submit, setSubmit] = useState(false)
     const navigate = useNavigate()
 

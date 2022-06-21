@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 // import other component
 import FormInput from '../../Forms/FormInput/FormInput';
@@ -14,7 +14,17 @@ import PropTypes from 'prop-types';
 import { getStorage } from '../../../utils/storage';
 
 
-const UserInformation = ({ username , firstName, lastName, email, birthday, onChangeInfo }) => {
+const UserInformation = () => {
+    const [user, setUser] = useState()
+
+    useEffect(() => {
+        const users = getStorage('users')
+        const id = getStorage('id')
+        const myUser = users.find(user => user.id === id)
+        
+        setUser(myUser)
+    }, [])
+
     const [submit, setSubmit] = useState(false)
 
     const isNotIterateEmail = (username, email) => {
@@ -26,13 +36,13 @@ const UserInformation = ({ username , firstName, lastName, email, birthday, onCh
 
         return ((!isNotIterateUsername && !isNotIterateEmail) || (isNotIterateUsername && isNotIterateEmail)) ? true : false
     }
-
+    
     const formik = useFormik({
         initialValues: {
-            firstName: firstName ? firstName : '',
-            lastName: lastName ? lastName : '',
-            email,
-            birthday,
+            firstName: user.firstName ? user.firstName : '',
+            lastName: user.lastName ? user.lastName : '',
+            email: user.email,
+            birthday: user.birthday,
         },
         validationSchema: object({
             firstName: string().max(10, 'your fisrt name must be 10 or less'),
@@ -43,30 +53,30 @@ const UserInformation = ({ username , firstName, lastName, email, birthday, onCh
                 .max('2022-05-22', 'invalid birthday date'),
         }),
         onSubmit: ({ firstName, lastName, email, birthday }, { setFieldError }) => {
-            const boolIsIterateEmail =  isNotIterateEmail(username, email)
+            const boolIsIterateEmail =  isNotIterateEmail(user.username, email)
             
             if (boolIsIterateEmail) {
-                if (!firstName && !lastName) {
-                    onChangeInfo(
-                        ['firstName', 'lastName', 'email', 'birthday'], 
-                        ['', '', email, birthday]
-                    )
-                } else if (!firstName) {
-                    onChangeInfo(
-                        ['firstName' , 'lastName', 'email', 'birthday'],
-                        ['', lastName, email, birthday]
-                    )
-                } else if (!lastName) {
-                    onChangeInfo(
-                        ['firstName', 'lastName','email', 'birthday'],
-                        [firstName, '' , email, birthday]
-                    )
-                } else {
-                    onChangeInfo(
-                        ['firstName', 'lastName', 'email', 'birthday'],
-                        [firstName, lastName, email, birthday]
-                    )
-                }
+                // if (!firstName && !lastName) {
+                //     onChangeInfo(
+                //         ['firstName', 'lastName', 'email', 'birthday'], 
+                //         ['', '', email, birthday]
+                //     )
+                // } else if (!firstName) {
+                //     onChangeInfo(
+                //         ['firstName' , 'lastName', 'email', 'birthday'],
+                //         ['', lastName, email, birthday]
+                //     )
+                // } else if (!lastName) {
+                //     onChangeInfo(
+                //         ['firstName', 'lastName','email', 'birthday'],
+                //         [firstName, '' , email, birthday]
+                //     )
+                // } else {
+                //     onChangeInfo(
+                //         ['firstName', 'lastName', 'email', 'birthday'],
+                //         [firstName, lastName, email, birthday]
+                //     )
+                // }
             } else 
                 setFieldError('email', "you can't choose this email")
         }
@@ -172,13 +182,13 @@ const UserInformation = ({ username , firstName, lastName, email, birthday, onCh
 }
 
 // validate the component
-UserInformation.propTypes = {
-    username: PropTypes.string.isRequired, 
-    firstName: PropTypes.string.isRequired,
-    lastName: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired, 
-    birthday: PropTypes.string.isRequired, 
-    onChangeInfo: PropTypes.func.isRequired,
-}
+// UserInformation.propTypes = {
+//     username: PropTypes.string.isRequired, 
+//     firstName: PropTypes.string.isRequired,
+//     lastName: PropTypes.string.isRequired,
+//     email: PropTypes.string.isRequired, 
+//     birthday: PropTypes.string.isRequired, 
+//     onChangeInfo: PropTypes.func.isRequired,
+// }
 
 export default UserInformation

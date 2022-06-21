@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 
 // import styles of this component
 import styles from './SideBarLinks.module.css'
@@ -9,10 +10,12 @@ import SideBarLink from "./SideBarLink/SideBarLink";
 // import other pkg 
 import PropTypes from 'prop-types'
 
-const SideBarLinks = ({ sidebarLinks, onChangeToggle }) => {
+const SideBarLinks = ({ sidebarLinks }) => {
     const [linksState, setLinks] = useState({
         links: [ ...sidebarLinks  ]
     })
+
+    const navigate = useNavigate()
 
     const activeLink = (linkId) => {
         linksState.links.forEach(link => link.active = false)
@@ -29,7 +32,7 @@ const SideBarLinks = ({ sidebarLinks, onChangeToggle }) => {
                 }
             })
 
-            onChangeToggle(link.text.toLowerCase())
+            navigate(link.navigate)
         }
     }
 
@@ -56,7 +59,6 @@ const SideBarLinks = ({ sidebarLinks, onChangeToggle }) => {
 // validate the component
 SideBarLinks.propTypes = {
     sidebarLinks: PropTypes.array.isRequired,
-    onChangeToggle: PropTypes.func.isRequired,
 }
 
 export default SideBarLinks

@@ -15,12 +15,12 @@ const UserCard = ({ sidebarLinks, username, userBirthday, userEmail, onChangeTog
 }
 
 // validate the component
-UserCard.propTypes = {
-    sidebarLinks: PropTypes.array.isRequired,
-    username: PropTypes.string.isRequired,
-    userBirthday: PropTypes.string.isRequired,
-    userEmail: PropTypes.string.isRequired,
-    onChangeToggle: PropTypes.func.isRequired
-}
+// UserCard.propTypes = {
+//     sidebarLinks: PropTypes.array.isRequired,
+//     username: PropTypes.string.isRequired,
+//     userBirthday: PropTypes.string.isRequired,
+//     userEmail: PropTypes.string.isRequired,
+//     onChangeToggle: PropTypes.func.isRequired
+// }
 
 export default UserCard
