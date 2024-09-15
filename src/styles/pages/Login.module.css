@@ -22,5 +22,19 @@ body {
     font-size: 1.4rem;
     color: #525252;
     margin-top: 15px;
-    margin-bottom: 40px;
+    margin-bottom: 70px;
+}
+.submit {
+    margin-top: 40px;
+    width: 100%;
+    padding: 22px;
+    font-size: 1.4rem;
+    border-radius: 15px;
+    border: none;
+    outline: none;
+    background-color: #258FE5;
+    color: #FFF;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 60px;
 }

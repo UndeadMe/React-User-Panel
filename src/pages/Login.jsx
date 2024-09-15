@@ -11,7 +11,11 @@ export default function Login() {
                 <h1>Welcome Back</h1>
                 <h3>welcome back, please enter your details</h3>
 
-                <Input type="email" label="Username or Email" />
+                <form action="">
+                    <Input type="email" label="Username or Email" />
+
+                    <button className={styles["submit"]}>Next</button>
+                </form>
             </div>
         </div>
     )
