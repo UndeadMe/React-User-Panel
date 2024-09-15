@@ -10,7 +10,7 @@ body {
     justify-content: center;
 }
 .login-box {
-    width: 400px;
+    width: 550pxx;
     text-align: center;
 }
 .login-box h1 {
@@ -19,7 +19,8 @@ body {
     color: #FFF;
 }
 .login-box h3 {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     color: #525252;
     margin-top: 15px;
+    margin-bottom: 40px;
 }
