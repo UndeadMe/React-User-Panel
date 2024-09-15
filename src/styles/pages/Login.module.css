@@ -1,15 +1,25 @@
+body {
+    background-color: #000;
+}
 .wrap {
     width: 100%;
     height: 100dvh;
     display: flex;
     flex-direction: row-reverse;
+    align-items: center;
+    justify-content: center;
 }
-.banner {
-    width: 50%;
-    overflow: hidden;
+.login-box {
+    width: 400px;
+    text-align: center;
 }
-.banner img {
-    object-fit: cover;
-    width: 150%;
-    height: 100vh;
+.login-box h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #FFF;
+}
+.login-box h3 {
+    font-size: 1.2rem;
+    color: #525252;
+    margin-top: 15px;
 }
