@@ -1,0 +1,25 @@
+.signup-login-wrap {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 50px;
+}
+.signup-login-box {
+    width: 100%;
+    background: #1b1b1b;
+    display: flex;
+    border-radius: 15px;
+    padding: 10px;
+}
+.signup-box, .login-box {
+    width: 50%;
+    text-align: center;
+    text-decoration: none;
+    padding: 20px;
+    color: #adadad;
+    font-size: 1.2rem;
+}
+.signup-box.active, .login-box.active {
+    background: #444444;
+    border-radius: 10px;
+}
