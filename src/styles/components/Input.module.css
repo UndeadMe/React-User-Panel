@@ -45,12 +45,12 @@
 .input:focus ~ .input-label {
     top: 0;
     left: 40px;
-    background-color: #000;
+    background-color: #0e0e0e;
     padding: 0 15px;
 }
 .input:not(.input:placeholder-shown) ~ .input-label {
     top: 0;
     left: 40px;
-    background-color: #000;
+    background-color: #0e0e0e;
     padding: 0 15px;
 }

@@ -6,20 +6,23 @@
     align-items: center;
     justify-content: center;
 }
-.login-box {
+.signup-box {
     width: 550pxx;
     text-align: center;
 }
-.login-box h1 {
+.signup-box h1 {
     font-size: 3rem;
     font-weight: bold;
     color: #FFF;
 }
-.login-box h3 {
+.signup-box h3 {
     font-size: 1.4rem;
     color: #525252;
     margin-top: 15px;
     margin-bottom: 40px;
+}
+.inputs {
+    margin-bottom: 30px;
 }
 .submit {
     margin-top: 40px;
@@ -35,11 +38,13 @@
     cursor: pointer;
     margin-top: 60px;
 }
+
 @media screen and (max-width: 700px) {
     .wrap {
+        margin: 100px 0;
         padding: 0 30px;
     }
-    .login-box {
+    .signup-box  {
         width: 100% !important;
     }
 }

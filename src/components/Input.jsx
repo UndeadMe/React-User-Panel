@@ -2,7 +2,7 @@ import { useState } from "react"
 
 import styles from '../styles/components/Input.module.css'
 
-import { Sms } from "iconsax-react"
+import { Sms, Lock, TextItalic } from "iconsax-react"
 
 
 export default function Input({ type="text", label, className }) {
@@ -14,6 +14,18 @@ export default function Input({ type="text", label, className }) {
                 <Sms
                     className={styles["input-icon"]}
                     size="50"
+                />
+            )}
+            {type === "password" && (
+                <Lock
+                    size="50"
+                    className={styles["input-icon"]}
+                />
+            )}
+            {type === "text" && (
+                <TextItalic
+                    size="50"
+                    className={styles["input-icon"]}
                 />
             )}
             <div className={styles["divider"]}></div>
