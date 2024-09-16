@@ -1,13 +1,17 @@
 .wrap {
     width: 100%;
     height: 100dvh;
+    padding: 50px 30px;
+}
+.container {
+    height: 100%;
+    width: 100%;
     display: flex;
-    flex-direction: row-reverse;
     align-items: center;
     justify-content: center;
 }
 .login-box {
-    width: 550pxx;
+    width: 550px;
     text-align: center;
 }
 .login-box h1 {
@@ -34,12 +38,4 @@
     font-weight: bold;
     cursor: pointer;
     margin-top: 60px;
-}
-@media screen and (max-width: 700px) {
-    .wrap {
-        padding: 0 30px;
-    }
-    .login-box {
-        width: 100% !important;
-    }
 }

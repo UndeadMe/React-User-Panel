@@ -5,6 +5,14 @@
     flex-direction: row-reverse;
     align-items: center;
     justify-content: center;
+    padding: 500px 30px;
+}
+.container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .signup-box {
     width: 550pxx;
@@ -37,14 +45,4 @@
     font-weight: bold;
     cursor: pointer;
     margin-top: 60px;
-}
-
-@media screen and (max-width: 700px) {
-    .wrap {
-        margin: 100px 0;
-        padding: 0 30px;
-    }
-    .signup-box  {
-        width: 100% !important;
-    }
 }

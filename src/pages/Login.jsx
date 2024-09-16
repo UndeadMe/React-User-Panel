@@ -8,17 +8,19 @@ export default function Login() {
     
     return (
         <div className={styles.wrap}>
-            <div className={styles["login-box"]}>
-                <h1>Welcome Back</h1>
-                <h3>welcome back, please enter your details</h3>
+            <div className={styles.container}>
+                <div className={styles["login-box"]}>
+                    <h1>Welcome Back</h1>
+                    <h3>welcome back, please enter your details</h3>
 
-                <SignUpOrLogin />
+                    <SignUpOrLogin />
 
-                <form action="">
-                    <Input type="email" label="Username or Email" />
+                    <form action="">
+                        <Input type="email" label="Username or Email" />
 
-                    <button className={styles["submit"]}>Next</button>
-                </form>
+                        <button className={styles["submit"]}>Next</button>
+                    </form>
+                </div>
             </div>
         </div>
     )
