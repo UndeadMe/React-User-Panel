@@ -5,9 +5,7 @@ import styles from '../styles/components/Input.module.css'
 import { Sms, Lock, TextItalic } from "iconsax-react"
 
 
-export default function Input({ type="text", label, className }) {
-    const [val, setVal] = useState("")
-
+export default function Input({ type="text", htmlfor, label, className, ...props }) {
     return (
         <div className={`${styles["input-box"]} ${className}`}>
             {type === "email" && (
@@ -31,13 +29,12 @@ export default function Input({ type="text", label, className }) {
             <div className={styles["divider"]}></div>
             <input
                 type={type} 
-                value={val} 
-                id="input"
-                onChange={(e) => setVal(e.target.value)}
+                id={htmlfor}  
+                {...props}
                 className={styles.input} 
                 placeholder="empty"
             />
-            <label className={styles["input-label"]} htmlFor="input">{label}</label>
+            <label className={styles["input-label"]} htmlFor={htmlfor}>{label}</label>
         </div>
     )
 }

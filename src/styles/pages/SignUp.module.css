@@ -30,7 +30,7 @@
     margin-bottom: 40px;
 }
 .inputs {
-    margin-bottom: 30px;
+    margin: 30px 0;
 }
 .submit {
     margin-top: 40px;
@@ -45,4 +45,13 @@
     font-weight: bold;
     cursor: pointer;
     margin-top: 60px;
+}
+.submit:disabled {
+    filter: brightness(0.5);
+}
+.error {
+    text-align: left;
+    margin: 0 0 30px 0;
+    color: #EA6666;
+    font-size: 1.1rem;
 }
