@@ -1,10 +1,11 @@
+import { useState } from 'react'
+
 import styles from '../styles/pages/SignUp.module.css'
 
 import Input from '../components/Input'
 import SignUpOrLogin from '../components/SignUpOrLogin'
 
-
-import { useFormik, validateYupSchema } from 'formik'
+import { useFormik } from 'formik'
 
 export default function SignUp() {
     const formik = useFormik({
@@ -37,6 +38,7 @@ export default function SignUp() {
         }
     })
 
+    const [submit, setSubmit] = useState(false)
 
     return (
         <div className={styles.wrap}>
@@ -55,7 +57,7 @@ export default function SignUp() {
                             htmlfor="username"
                             {...formik.getFieldProps('username')}
                         />
-                        {formik.touched.username ? (
+                        {(formik.touched.username && submit) ? (
                             <h6 className={styles["error"]}>{formik.errors.username}</h6>
                         ) : null}
                         
@@ -67,7 +69,7 @@ export default function SignUp() {
                             htmlfor="email"
                             {...formik.getFieldProps('email')}
                         />
-                        {formik.touched.email ? (
+                        {(formik.touched.email && submit) ? (
                             <h6 className={styles["error"]}>{formik.errors.email}</h6>
                         ): null}
                         
@@ -78,7 +80,7 @@ export default function SignUp() {
                             htmlfor="password"
                             {...formik.getFieldProps('password')}
                         />
-                        {formik.touched.password ? (
+                        {(formik.touched.password && submit) ? (
                             <h6 className={styles["error"]}>{formik.errors.password}</h6>
                         ) : null}
                         
@@ -89,11 +91,11 @@ export default function SignUp() {
                             htmlfor="confirmPassword"
                             {...formik.getFieldProps('confirmPassword')}
                          />
-                        {formik.touched.confirmPassword ? (
+                        {(formik.touched.confirmPassword && submit) ? (
                             <h6 className={styles["error"]}>{formik.errors.confirmPassword}</h6>
                         ) : null}
 
-                        <button type='submit' className={styles["submit"]} disabled={!formik.isValid}>Next</button>
+                        <button type='submit' className={styles["submit"]} disabled={!formik.isValid && submit} onClick={() => setSubmit(true)}>Next</button>
                     </form>
                 </div>
             </div>
