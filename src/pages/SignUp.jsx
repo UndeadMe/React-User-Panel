@@ -18,14 +18,14 @@ export default function SignUp() {
         validate: ({ username, email, password, confirmPassword }) => {
             const errors = {}
 
-            const allCharactersRe = /[a-zA-Z]{4,}/g
+            const allCharactersRe = /[a-zA-Z]/g
             const allNumsRe = /[0-9]/g
             const emailRe = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
 
             if (!allCharactersRe.test(username) && !allNumsRe.test(username))
                 errors.username = "username must have numbers and letters"
-            if (!emailRe.test(email)) 
-                errors.email = "email is invalid"
+            if (!emailRe.test(email) && (!email.includes('gmail') || !email.includes('yahoo'))) 
+                errors.email = "email is invalid and must be gmail or just yahoo"
             if (!(password.length >= 8))
                 errors.password = "password must be more than 8 letters"
             if (password != confirmPassword || !(confirmPassword.length >= 8))
